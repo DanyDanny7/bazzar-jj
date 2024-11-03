@@ -1,18 +1,23 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { promises as fs } from 'fs';
+import clientPromise from "../../lib/mongodb";
 
-export default async function handler(req, res) {
-  const data = await fs.readFile(process.cwd() + '/public/products.json', 'utf8');
-
+export default async (req, res) => {
   const { slug } = req.query
 
-  const products = JSON.parse(data);
-
-  const product = products.find((product) => product.slug === slug);
-
-  if (product) {
-    res.status(200).json(product);
-  } else {
-    res.status(400).json({});
+  try {
+    const client = await clientPromise;
+    const db = client.db(process.env.MONTODB_DB);
+    const productos = await db
+      .collection("productos")
+      .sort({ metacritic: -1 })
+      .limit(10)
+      .toArray();
+    res.json(productos);
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({
+      isError: true,
+      error: error,
+      msg: "No se pudo obtener los datos"
+    });
   }
 }

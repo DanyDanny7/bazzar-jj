@@ -1,11 +1,12 @@
 import Layout from "@/components/layout";
-import Category from "@/components/category";
+import Dashboard from "@/components/dashboard";
 import axios from "axios";
 
 export default function Home({ data }) {
+  console.log(data)
   return (
     <Layout>
-      <Category data={data} />
+      <Dashboard data={data} />
     </Layout>
   );
 }
@@ -14,12 +15,10 @@ export async function getServerSideProps(ctx) {
   const slug = ctx.query.category;
   let data = {}
   try {
-    const res = await axios(`${process.env.REACT_APP_API_URL}/api/categorias`, {
-      params: { slug }
-    })
+    const res = await axios(`${process.env.REACT_APP_API_URL}/api/categorias`)
     data = res.data
   } catch (error) {
-
+    console.log(error)
   }
   return { props: { data } }
 }

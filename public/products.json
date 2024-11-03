@@ -1,5 +1,75 @@
 [
     {
+        "slug": "camiseta-negra",
+        "name": "Camiseta negra",
+        "price": "$35",
+        "images": [
+            {
+                "id": 1,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
+                "imageAlt": "Back of women's Basic Tee in black.",
+                "primary": true
+            },
+            {
+                "id": 2,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-01.jpg",
+                "imageAlt": "Side profile of women's Basic Tee in black.",
+                "primary": false
+            },
+            {
+                "id": 3,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-02.jpg",
+                "imageAlt": "Front of women's Basic Tee in black.",
+                "primary": false
+            }
+        ],
+        "colors": [
+            {
+                "name": "Black",
+                "bgColor": "bg-gray-900",
+                "selectedColor": "ring-gray-900"
+            },
+            {
+                "name": "Heather Grey",
+                "bgColor": "bg-gray-400",
+                "selectedColor": "ring-gray-400"
+            }
+        ],
+        "sizes": [
+            {
+                "name": "XXS",
+                "inStock": false
+            },
+            {
+                "name": "XS",
+                "inStock": false
+            },
+            {
+                "name": "S",
+                "inStock": false
+            },
+            {
+                "name": "M",
+                "inStock": true
+            },
+            {
+                "name": "L",
+                "inStock": true
+            },
+            {
+                "name": "XL",
+                "inStock": true
+            }
+        ],
+        "description": "<p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p><p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>",
+        "details": [
+            "Only the best materials",
+            "Ethically and locally made",
+            "Pre-washed and pre-shrunk",
+            "Machine wash cold with similar colors"
+        ]
+    },
+    {
         "slug": "basic-tee",
         "name": "Camiseta negra",
         "price": "$35",
@@ -70,95 +140,283 @@
         ]
     },
     {
-        "slug": "chaqueta-de-lona",
-        "name": "Chaqueta de lona"
+        "slug": "basic-tee",
+        "name": "Camiseta negra",
+        "price": "$35",
+        "images": [
+            {
+                "id": 1,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
+                "imageAlt": "Back of women's Basic Tee in black.",
+                "primary": true
+            },
+            {
+                "id": 2,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-01.jpg",
+                "imageAlt": "Side profile of women's Basic Tee in black.",
+                "primary": false
+            },
+            {
+                "id": 3,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-02.jpg",
+                "imageAlt": "Front of women's Basic Tee in black.",
+                "primary": false
+            }
+        ],
+        "colors": [
+            {
+                "name": "Black",
+                "bgColor": "bg-gray-900",
+                "selectedColor": "ring-gray-900"
+            },
+            {
+                "name": "Heather Grey",
+                "bgColor": "bg-gray-400",
+                "selectedColor": "ring-gray-400"
+            }
+        ],
+        "sizes": [
+            {
+                "name": "XXS",
+                "inStock": true
+            },
+            {
+                "name": "XS",
+                "inStock": true
+            },
+            {
+                "name": "S",
+                "inStock": true
+            },
+            {
+                "name": "M",
+                "inStock": true
+            },
+            {
+                "name": "L",
+                "inStock": true
+            },
+            {
+                "name": "XL",
+                "inStock": false
+            }
+        ],
+        "description": "<p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p><p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>",
+        "details": [
+            "Only the best materials",
+            "Ethically and locally made",
+            "Pre-washed and pre-shrunk",
+            "Machine wash cold with similar colors"
+        ]
     },
     {
-        "slug": "jacket-impermeable",
-        "name": "Jacket Impermeable"
+        "slug": "basic-tee",
+        "name": "Camiseta negra",
+        "price": "$35",
+        "images": [
+            {
+                "id": 1,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
+                "imageAlt": "Back of women's Basic Tee in black.",
+                "primary": true
+            },
+            {
+                "id": 2,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-01.jpg",
+                "imageAlt": "Side profile of women's Basic Tee in black.",
+                "primary": false
+            },
+            {
+                "id": 3,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-02.jpg",
+                "imageAlt": "Front of women's Basic Tee in black.",
+                "primary": false
+            }
+        ],
+        "colors": [
+            {
+                "name": "Black",
+                "bgColor": "bg-gray-900",
+                "selectedColor": "ring-gray-900"
+            },
+            {
+                "name": "Heather Grey",
+                "bgColor": "bg-gray-400",
+                "selectedColor": "ring-gray-400"
+            }
+        ],
+        "sizes": [
+            {
+                "name": "XXS",
+                "inStock": true
+            },
+            {
+                "name": "XS",
+                "inStock": true
+            },
+            {
+                "name": "S",
+                "inStock": true
+            },
+            {
+                "name": "M",
+                "inStock": true
+            },
+            {
+                "name": "L",
+                "inStock": true
+            },
+            {
+                "name": "XL",
+                "inStock": false
+            }
+        ],
+        "description": "<p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p><p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>",
+        "details": [
+            "Only the best materials",
+            "Ethically and locally made",
+            "Pre-washed and pre-shrunk",
+            "Machine wash cold with similar colors"
+        ]
     },
     {
-        "name": "Desk and Office 1",
-        "description": "Work from home accessories",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-        "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-        "slug": "desk-and-office-1"
+        "slug": "basic-tee",
+        "name": "Camiseta negra",
+        "price": "$35",
+        "images": [
+            {
+                "id": 1,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
+                "imageAlt": "Back of women's Basic Tee in black.",
+                "primary": true
+            },
+            {
+                "id": 2,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-01.jpg",
+                "imageAlt": "Side profile of women's Basic Tee in black.",
+                "primary": false
+            },
+            {
+                "id": 3,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-02.jpg",
+                "imageAlt": "Front of women's Basic Tee in black.",
+                "primary": false
+            }
+        ],
+        "colors": [
+            {
+                "name": "Black",
+                "bgColor": "bg-gray-900",
+                "selectedColor": "ring-gray-900"
+            },
+            {
+                "name": "Heather Grey",
+                "bgColor": "bg-gray-400",
+                "selectedColor": "ring-gray-400"
+            }
+        ],
+        "sizes": [
+            {
+                "name": "XXS",
+                "inStock": true
+            },
+            {
+                "name": "XS",
+                "inStock": true
+            },
+            {
+                "name": "S",
+                "inStock": true
+            },
+            {
+                "name": "M",
+                "inStock": true
+            },
+            {
+                "name": "L",
+                "inStock": true
+            },
+            {
+                "name": "XL",
+                "inStock": false
+            }
+        ],
+        "description": "<p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p><p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>",
+        "details": [
+            "Only the best materials",
+            "Ethically and locally made",
+            "Pre-washed and pre-shrunk",
+            "Machine wash cold with similar colors"
+        ]
     },
     {
-        "name": "Self-Improvement 2",
-        "description": "Journals and note-taking",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-        "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-        "slug": "self-mprovement-2"
-    },
-    {
-        "name": "Travel",
-        "description": "Daily commute essentials 3",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-        "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-        "slug": "travel"
-    },
-    {
-        "name": "Self-Improvement 5",
-        "description": "Journals and note-taking",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-        "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-        "slug": "self-mprovement-5"
-    },
-    {
-        "name": "Travel 5",
-        "description": "Daily commute essentials",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-        "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-        "slug": "travel-5"
-    },
-    {
-        "name": "Desk and Office 4",
-        "description": "Work from home accessories",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-        "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-        "slug": "desk-and-office-4"
-    },
-    {
-        "name": "Desk and Office 6",
-        "description": "Work from home accessories",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-        "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-        "slug": "desk-and-office-6"
-    },
-    {
-        "name": "Travel 7",
-        "description": "Daily commute essentials",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-        "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-        "slug": "travel-7"
-    },
-    {
-        "name": "Self-Improvement 7",
-        "description": "Journals and note-taking",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-        "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-        "slug": "self-mprovement-7"
-    },
-    {
-        "name": "Travel 10",
-        "description": "Daily commute essentials",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-        "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-        "slug": "travel-10"
-    },
-    {
-        "name": "Desk and Office 8",
-        "description": "Work from home accessories",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-        "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-        "slug": "desk-and-office-8"
-    },
-    {
-        "name": "Self-Improvement 9",
-        "description": "Journals and note-taking",
-        "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-        "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-        "slug": "self-mprovement-9"
+        "slug": "basic-tee",
+        "name": "Camiseta negra",
+        "price": "$35",
+        "images": [
+            {
+                "id": 1,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
+                "imageAlt": "Back of women's Basic Tee in black.",
+                "primary": true
+            },
+            {
+                "id": 2,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-01.jpg",
+                "imageAlt": "Side profile of women's Basic Tee in black.",
+                "primary": false
+            },
+            {
+                "id": 3,
+                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-02.jpg",
+                "imageAlt": "Front of women's Basic Tee in black.",
+                "primary": false
+            }
+        ],
+        "colors": [
+            {
+                "name": "Black",
+                "bgColor": "bg-gray-900",
+                "selectedColor": "ring-gray-900"
+            },
+            {
+                "name": "Heather Grey",
+                "bgColor": "bg-gray-400",
+                "selectedColor": "ring-gray-400"
+            }
+        ],
+        "sizes": [
+            {
+                "name": "XXS",
+                "inStock": true
+            },
+            {
+                "name": "XS",
+                "inStock": true
+            },
+            {
+                "name": "S",
+                "inStock": true
+            },
+            {
+                "name": "M",
+                "inStock": true
+            },
+            {
+                "name": "L",
+                "inStock": true
+            },
+            {
+                "name": "XL",
+                "inStock": false
+            }
+        ],
+        "description": "<p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p><p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>",
+        "details": [
+            "Only the best materials",
+            "Ethically and locally made",
+            "Pre-washed and pre-shrunk",
+            "Machine wash cold with similar colors"
+        ]
     }
 ]

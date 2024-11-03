@@ -1,25 +1,28 @@
 'use client'
+import get from "lodash/get";
 
 import { useState } from 'react'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/24/outline'
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
+import { useRouter } from 'next/router'
 
-const features = [
-    {
-        name: 'Minimal and thoughtful',
-        description:
-            'Our laptop sleeve is compact and precisely fits 13" devices. The zipper allows you to access the interior with ease, and the front pouch provides a convenient place for your charger cable.',
-        imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-feature-07-detail-01.jpg',
-        imageAlt: 'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.',
-    },
-]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Welcome() {
-    const [open, setOpen] = useState(true)
+export default function Welcome({ product, category }) {
+    const router = useRouter()
+    const [open, setOpen] = useState(true);
+
+    const features = [
+        {
+            name: get(product, "name"),
+            description: get(product, "description"),
+            imageSrc: get(product, "imageSrc"),
+            imageAlt: get(product, "imageAlt"),
+        },
+    ]
+
 
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -39,10 +42,9 @@ export default function Welcome() {
                                 <div className="bg-white">
                                     <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
                                         <div className="mx-auto max-w-3xl text-center">
-                                            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Protect your device</h2>
+                                            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Nuestro producto más reciente</h2>
                                             <p className="mt-4 text-gray-500">
-                                                As a digital creative, your laptop or tablet is at the center of your work. Keep your device safe with a
-                                                fabric sleeve that matches in quality and looks.
+                                                Este es el producto más reciente de nuestro catálogo
                                             </p>
                                         </div>
 
@@ -59,7 +61,7 @@ export default function Welcome() {
                                                         )}
                                                     >
                                                         <h3 className="text-lg font-medium text-gray-900">{feature.name}</h3>
-                                                        <p className="mt-2 text-sm text-gray-500">{feature.description}</p>
+                                                        <p className="mt-2 text-sm text-gray-500" dangerouslySetInnerHTML={{ __html: feature.description }} />
                                                     </div>
                                                     <div
                                                         className={classNames(
@@ -78,13 +80,20 @@ export default function Welcome() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-2 sm:mt-3">
+                        <div className="mt-2 sm:mt-3 flex gap-2">
                             <button
                                 type="button"
                                 onClick={() => setOpen(false)}
+                                className="inline-flex w-full justify-center rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => router.push(`/${get(category, "slug")}/${get(product, "slug")}`)}
                                 className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Go back to dashboard
+                                Ver producto
                             </button>
                         </div>
                     </DialogPanel>
