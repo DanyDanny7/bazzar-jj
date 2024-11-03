@@ -3,7 +3,10 @@ import { useRouter } from 'next/router';
 
 
 /*
----prueba mjruiz
+---prueba 234 mjruiz
+  This example requires some changes to your config:
+
+  ---prueba mjruiz
   This example requires some changes to your config:
   
   ```
