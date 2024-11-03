@@ -1,10 +1,10 @@
 import Layout from "@/components/layout";
-import Dashboard from "@/components/dashboard";
+import Category from "@/components/category";
 
 export default function Home() {
   return (
     <Layout>
-      <Dashboard />
+      <Category />
     </Layout>
   );
 }
