@@ -3,8 +3,8 @@ const navigation = {
         { name: 'Atencion al Cliente', href: '/atencion-al-cliente' },
         { name: 'Política de devoluciones', href: '/politica-de-devolucion' },
         { name: 'Contáctenos', href: '/contactenos' },
-        { name: 'Envíos y devoluciones', href: '#' },
-        { name: 'Métodos de pago', href: '#' },
+        { name: 'Envíos y devoluciones', href: '/envio-devolucion' },
+        { name: 'Métodos de pago', href: '/metodos-de-pagos' },
         { name: 'Visión y Misión', href: '/mision-vision' },
     ],
     social: [
