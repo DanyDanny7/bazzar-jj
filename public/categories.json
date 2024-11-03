@@ -1,119 +1,117 @@
 [
-    {
-        "slug": "dama",
-        "nombre": "Dama",
-        "products": [
-            {
-                "slug": "basic-tee",
-                "name": "Basic Tee",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg"
-            },
-            {
-                "slug": "chaqueta-de-lona",
-                "name": "Chaqueta de lona"
-            },
-            {
-                "slug": "jacket-impermeable",
-                "name": "Jacket Impermeable"
-            },
-            {
-                "name": "Desk and Office 1",
-                "description": "Work from home accessories",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-                "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-                "slug": "desk-and-office-1"
-            },
-            {
-                "name": "Self-Improvement 2",
-                "description": "Journals and note-taking",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-                "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-                "slug": "self-mprovement-2"
-            },
-            {
-                "name": "Travel",
-                "description": "Daily commute essentials 3",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-                "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-                "slug": "travel"
-            },
-            {
-                "name": "Self-Improvement 5",
-                "description": "Journals and note-taking",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-                "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-                "slug": "self-mprovement-5"
-            },
-            {
-                "name": "Travel 5",
-                "description": "Daily commute essentials",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-                "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-                "slug": "travel-5"
-            },
-            {
-                "name": "Desk and Office 4",
-                "description": "Work from home accessories",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-                "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-                "slug": "desk-and-office-4"
-            },
-            {
-                "name": "Desk and Office 6",
-                "description": "Work from home accessories",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-                "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-                "slug": "desk-and-office-6"
-            },
-            {
-                "name": "Travel 7",
-                "description": "Daily commute essentials",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-                "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-                "slug": "travel-7"
-            },
-            {
-                "name": "Self-Improvement 7",
-                "description": "Journals and note-taking",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-                "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-                "slug": "self-mprovement-7"
-            },
-            {
-                "name": "Travel 10",
-                "description": "Daily commute essentials",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
-                "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
-                "slug": "travel-10"
-            },
-            {
-                "name": "Desk and Office 8",
-                "description": "Work from home accessories",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
-                "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-                "slug": "desk-and-office-8"
-            },
-            {
-                "name": "Self-Improvement 9",
-                "description": "Journals and note-taking",
-                "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
-                "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-                "slug": "self-mprovement-9"
-            }
-        ]
+{
+    "_id": {
+        "$oid": "6727bf2149818867d994a131"
     },
-    {
-        "slug": "caballero",
-        "nombre": "Caballero",
-        "products": [
-            {
-                "slug": "chaqueta-de-lona",
-                "name": "Chaqueta de lona"
-            },
-            {
-                "slug": "jacket-impermeable",
-                "name": "Jacket Impermeable"
-            }
-        ]
-    }
+    "slug": "dama",
+    "nombre": "Dama",
+    "products": [
+        {
+            "slug": "basic-tee",
+            "name": "Basic Tee",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
+            "description": "Prenda con silueta semi ajustada que brinda comodidad y versatilidad, puedes combinar con tus tacones favoritos, tenis o sandalias, es ideal para proyectar distinción y verte casual.",
+            "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug."
+        },
+        {
+            "slug": "chaqueta-de-lona",
+            "name": "Chaqueta de lona",
+            "description": "Prenda con silueta semi ajustada que brinda comodidad y versatilidad, puedes combinar con tus tacones favoritos, tenis o sandalias, es ideal para proyectar distinción y verte casual.",
+            "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg"
+        },
+        {
+            "slug": "jacket-impermeable",
+            "name": "Jacket Impermeable",
+            "description": "Prenda con silueta semi ajustada que brinda comodidad y versatilidad, puedes combinar con tus tacones favoritos, tenis o sandalias, es ideal para proyectar distinción y verte casual.",
+            "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg"
+        },
+        {
+            "name": "Desk and Office 1",
+            "description": "Work from home accessories",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
+            "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
+            "slug": "desk-and-office-1"
+        },
+        {
+            "name": "Self-Improvement 2",
+            "description": "Journals and note-taking",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
+            "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
+            "slug": "self-mprovement-2"
+        },
+        {
+            "name": "Travel",
+            "description": "Daily commute essentials 3",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
+            "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
+            "slug": "travel"
+        },
+        {
+            "name": "Self-Improvement 5",
+            "description": "Journals and note-taking",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
+            "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
+            "slug": "self-mprovement-5"
+        },
+        {
+            "name": "Travel 5",
+            "description": "Daily commute essentials",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
+            "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
+            "slug": "travel-5"
+        },
+        {
+            "name": "Desk and Office 4",
+            "description": "Work from home accessories",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
+            "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
+            "slug": "desk-and-office-4"
+        },
+        {
+            "name": "Desk and Office 6",
+            "description": "Work from home accessories",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
+            "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
+            "slug": "desk-and-office-6"
+        },
+        {
+            "name": "Travel 7",
+            "description": "Daily commute essentials",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
+            "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
+            "slug": "travel-7"
+        },
+        {
+            "name": "Self-Improvement 7",
+            "description": "Journals and note-taking",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
+            "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
+            "slug": "self-mprovement-7"
+        },
+        {
+            "name": "Travel 10",
+            "description": "Daily commute essentials",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg",
+            "imageAlt": "Collection of four insulated travel bottles on wooden shelf.",
+            "slug": "travel-10"
+        },
+        {
+            "name": "Desk and Office 8",
+            "description": "Work from home accessories",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg",
+            "imageAlt": "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
+            "slug": "desk-and-office-8"
+        },
+        {
+            "name": "Self-Improvement 9",
+            "description": "Journals and note-taking",
+            "imageSrc": "https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg",
+            "imageAlt": "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
+            "slug": "self-mprovement-9"
+        }
+    ],
+    "imagen": "https://img.freepik.com/foto-gratis/conjunto-ropa-mujer-moda-camisa-jeans-bolso-look-moda-hipster-endecha-plana_169016-3209.jpg"
+}
 ]
