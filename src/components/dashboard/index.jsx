@@ -1,11 +1,13 @@
-import Category1 from "./Category1";
-import Category2 from "./Category2";
-import Category3 from "./Category3";
-import Category4 from "./Category4";
+import last from "lodash/last";
+import get from "lodash/get";
+
+import ShopByCategory from "./ShopByCategory";
+import Cat1 from "./Cat1";
+import Cat2 from "./Cat2";
+import Cat3 from "./Cat3";
 import Welcome from "./Welcome";
 
-
-export default function Example() {
+export default function Example({ data }) {
     return (
         <div id="contenido" className="bg-white">
             <div aria-hidden="true" className="relative">
@@ -26,12 +28,12 @@ export default function Example() {
                     </p>
                 </div>
 
-                <Category1 />
-                <Category2 />
-                <Category3 />
-                <Category4 />
+                <ShopByCategory categories={data} />
+                <Cat1 category={get(data, "[0]")} />
+                <Cat2 category={get(data, "[1]")} />
+                <Cat3 category={get(data, "[1]")} />
             </div>
-            <Welcome />
+            <Welcome product={last(get(last(data), "products"))} category={last(data)} />
         </div>
     )
 }

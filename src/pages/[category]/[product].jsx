@@ -12,10 +12,9 @@ export default function Home({ data }) {
 
 export async function getServerSideProps(ctx) {
   const slug = ctx.query.product;
-  // Fetch data from external API
   let data = {}
   try {
-    const res = await axios(`http://localhost:3000/api/product`, {
+    const res = await axios(`${process.env.REACT_APP_API_URL}/api/productos`, {
       params: { slug }
     })
     data = res.data
