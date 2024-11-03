@@ -34,7 +34,6 @@ export default function Layout({ children }) {
   const [active, setActive] = useState("")
 
   const { category } = router.query;
-  console.log(category)
 
   useEffect(() => {
     setActive(`/${category || ""}`)
