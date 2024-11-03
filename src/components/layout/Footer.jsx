@@ -1,11 +1,11 @@
 const navigation = {
     main: [
-        { name: 'About', href: '#' },
-        { name: 'Blog', href: '#' },
-        { name: 'Jobs', href: '#' },
-        { name: 'Press', href: '#' },
-        { name: 'Accessibility', href: '#' },
-        { name: 'Partners', href: '#' },
+        { name: 'Atencion al Cliente', href: '/atencion-al-cliente' },
+        { name: 'Política de devoluciones', href: '/politica-de-devolucion' },
+        { name: 'Contáctenos', href: '/contactenos' },
+        { name: 'Envíos y devoluciones', href: '#' },
+        { name: 'Métodos de pago', href: '#' },
+        { name: 'Visión y Misión', href: '/mision-vision' },
     ],
     social: [
         {
@@ -91,7 +91,7 @@ export default function Example() {
                         </a>
                     ))}
                 </div>
-                <p className="mt-10 text-center text-sm/6 text-gray-600">&copy; 2024 Your Company, Inc. All rights reserved.</p>
+                <p className="mt-10 text-center text-sm/6 text-gray-600">&copy; 2024 Bazar JJ, Inc. All rights reserved.</p>
             </div>
         </footer>
     )
