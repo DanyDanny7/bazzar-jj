@@ -16,10 +16,8 @@ export default async (req, res) => {
             .toArray();
 
         if (!!slug) {
-            console.log("search")
             res.json(categorieas[0]);
         } else {
-            console.log("no-search")
             res.json(categorieas);
         }
     } catch (e) {
