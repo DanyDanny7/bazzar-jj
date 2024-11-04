@@ -7,14 +7,12 @@ if (!process.env.NEXT_PUBLIC_MONGODB_URI) {
 const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
 const options = { appName: "devrel.template.nextjs" };
 
-let client: MongoClient;
+let client;
 
 if (process.env.NODE_ENV === "development") {
   // In development mode, use a global variable so that the value
   // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  let globalWithMongo = global as typeof globalThis & {
-    _mongoClient?: MongoClient;
-  };
+  let globalWithMongo = global;
 
   if (!globalWithMongo._mongoClient) {
     globalWithMongo._mongoClient = new MongoClient(uri, options);
