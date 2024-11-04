@@ -5,7 +5,7 @@ export default async (req, res) => {
 
   try {
     const client = await clientPromise;
-    const db = client.db(process.env.MONTODB_DB);
+    const db = client.db(process.env.NEXT_PUBLIC_MONTODB_DB);
     const productos = await db
       .collection("productos")
       .sort({ metacritic: -1 })
