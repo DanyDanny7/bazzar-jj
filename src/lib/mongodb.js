@@ -1,12 +1,10 @@
 import { MongoClient } from "mongodb";
 
-const uri = "mongodb+srv://mariaruiz221160:EzrRaB4W6oASsxa8@cluster0.2yaog.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+if (!process.env.MONGODB_URI) {
+  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
+}
 
-// if (!process.env.NEXT_PUBLIC_MONGODB_URI) {
-//   throw new Error('Invalid/Missing environment variable: "NEXT_PUBLIC_MONGODB_URI"');
-// }
-
-// const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 const options = { appName: "devrel.template.nextjs" };
 
 let client;
