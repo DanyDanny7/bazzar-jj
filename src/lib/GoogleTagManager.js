@@ -1,5 +1,5 @@
 import { GoogleTagManager } from '@next/third-parties/google';
 
 export default () => {
-    return <GoogleTagManager gaId="GTM-KCZFX48J" />
+    return <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
 }
