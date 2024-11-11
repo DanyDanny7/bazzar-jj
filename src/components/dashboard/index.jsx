@@ -1,13 +1,17 @@
 import last from "lodash/last";
 import get from "lodash/get";
+import map from "lodash/map";
+import toString from "lodash/toString";
+import dynamic from 'next/dynamic';
 
-import ShopByCategory from "./ShopByCategory";
-import Cat1 from "./Cat1";
-import Cat2 from "./Cat2";
-import Cat3 from "./Cat3";
-import Welcome from "./Welcome";
+const ShopByCategory = dynamic(() => import('./ShopByCategory'), { ssr: false });
+const Type_1 = dynamic(() => import('./Type_1'), { ssr: false });
+const Type_2 = dynamic(() => import('./Type_2'), { ssr: false });
+const Type_3 = dynamic(() => import('./Type_3'), { ssr: false });
+const Welcome = dynamic(() => import('./Welcome'), { ssr: false });
 
 export default function Example({ data }) {
+
     return (
         <div id="contenido" className="bg-white">
             <div aria-hidden="true" className="relative">
@@ -27,11 +31,17 @@ export default function Example({ data }) {
                         meticulously arrange items into dedicated trays.
                     </p>
                 </div>
-
                 <ShopByCategory categories={data} />
-                <Cat1 category={get(data, "[0]")} />
-                <Cat2 category={get(data, "[1]")} />
-                <Cat3 category={get(data, "[1]")} />
+
+                {map(data, (category) => {
+                    console.log(toString(get(category, "type", 0)))
+                    switch (toString(get(category, "type", 0))) {
+                        case "1": return <Type_1 category={category} />;
+                        case "2": return <Type_2 category={category} />;
+                        case "3": return <Type_3 category={category} />;
+                        default: return <Type_1 category={category} />;
+                    }
+                })}
             </div>
             <Welcome product={last(get(last(data), "products"))} category={last(data)} />
         </div>
