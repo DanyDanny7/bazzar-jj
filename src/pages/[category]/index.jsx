@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import Category from "@/components/category";
 import axios from "axios";
+import isEmpty from "lodash/isEmpty";
 
 export default function Home({ data }) {
   return (
@@ -18,6 +19,16 @@ export async function getServerSideProps(ctx) {
       params: { slug }
     })
     data = res.data
+
+    if (isEmpty(data)) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: `/404?from=${ctx.resolvedUrl}`,
+        },
+        props: {},
+      };
+    }
   } catch (error) {
 
   }

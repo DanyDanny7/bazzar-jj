@@ -1,12 +1,10 @@
-import { options, uri } from "../../lib/mongodb";
-import { MongoClient } from "mongodb";
+import mongoClient from "../../lib/mongodb";
 
 export default async (req, res) => {
     const { slug } = req.query;
     const search = slug ? { slug } : {};
 
     try {
-        const mongoClient = await (new MongoClient(uri, options)).connect();
         const db = mongoClient.db("Bazzar-JJ");
         const categorieas = await db
             .collection("categorias")
@@ -16,12 +14,11 @@ export default async (req, res) => {
             .toArray();
 
         if (!!slug) {
-            res.json(categorieas[0]);
+            return res.status(200).json(categorieas[0])
         } else {
-            res.json(categorieas);
+            return res.status(200).json(categorieas)
         }
     } catch (e) {
-        console.error(e);
+        return res.status(400).json({})
     }
-    res.json({});
 }

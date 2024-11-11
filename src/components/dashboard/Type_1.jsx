@@ -1,9 +1,11 @@
+"use client"
+
 import get from "lodash/get";
 import map from "lodash/map";
 import slice from "lodash/slice";
 import Link from "next/link";
 
-export default function Cat1({ category }) {
+export default function Type_1({ category }) {
     return (
         <div className="bg-gray-100">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -18,23 +20,23 @@ export default function Cat1({ category }) {
 
                     <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
                         {map(slice(get(category, "products", []), 0, 3), (product) => (
-                            <div key={product.name} className="group relative">
+                            <div key={get(product, "name", "")} className="group relative">
                                 <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
                                     <img
-                                        alt={product.imageAlt}
-                                        src={product.imageSrc}
+                                        alt={get(product, "imageAlt", "")}
+                                        src={get(product, "imageSrc", "")}
                                         className="h-full w-full object-cover object-center"
                                     />
                                 </div>
                                 <h3 className="mt-2 text-sm text-gray-500">
-                                    <Link href={`/${get(category, "slug")}/${get(product, "slug")}`}>
+                                    <Link href={`/${get(category, "slug")}/${get(product, "slug", "")}`}>
                                         <>
                                             <span className="absolute inset-0" />
-                                            <div className="text-lg text-black font-semibold">{product.name}</div>
+                                            <div className="text-lg text-black font-semibold">{get(product, "name", "")}</div>
                                         </>
                                     </Link>
                                 </h3>
-                                <p className="text-base text-gray-600 line-clamp-3 leading-[1.2]">{product.description}</p>
+                                <p className="text-base text-gray-600 line-clamp-3 leading-[1.2]" dangerouslySetInnerHTML={{ __html: get(product, "description", "") }} />
                             </div>
                         ))}
                     </div>

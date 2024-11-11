@@ -4,10 +4,10 @@ import Layout from "@/components/layout";
 const MetodosDePagos = () => {
   return (
     <Layout>
-    <div>
-       aqui iria la informacion de los metodos de pago 
-    </div>
-</Layout>
+      <div>
+        aqui iria la informacion de los metodos de pago
+      </div>
+    </Layout>
   )
 }
 

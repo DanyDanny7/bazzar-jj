@@ -1,9 +1,11 @@
+"use client"
+
 import get from "lodash/get";
 import map from "lodash/map";
 import slice from "lodash/slice";
 import Link from "next/link";
 
-export default function Cat2({ category }) {
+export default function Type_2({ category }) {
     return (
         <div className="bg-white">
             <div className="py-16 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
@@ -17,9 +19,9 @@ export default function Cat2({ category }) {
 
                 <div className="mt-4 flow-root">
                     <div className="-my-2">
-                        <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible">
+                        <div className="relative box-content h-80 overflow-x-auto py-4 xl:overflow-visible">
                             <div className="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
-                                {map(slice(get(category, "products", []), 0, 10), (product) => (
+                                {map(slice(get(category, "products", []), 0, 5), (product) => (
                                     <Link
                                         key={get(product, "name")}
                                         href={`/${get(category, "slug")}/${get(product, "slug")}`}

@@ -16,12 +16,12 @@ export default async (req, res) => {
             .toArray();
 
         if (!!slug) {
-            res.json(productos[0]);
+            return res.status(200).json(productos[0])
         } else {
-            res.json(productos);
+            return res.status(200).json(productos)
         }
-
+        
     } catch (e) {
-        console.error(e);
+        return res.status(400).json({})
     }
 }
