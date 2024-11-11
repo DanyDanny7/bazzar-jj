@@ -3,7 +3,6 @@ import Dashboard from "@/components/dashboard";
 import axios from "axios";
 
 export default function Home({ data }) {
-  console.log(data)
   return (
     <Layout>
       <Dashboard data={data} />
