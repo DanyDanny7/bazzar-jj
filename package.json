@@ -14,6 +14,7 @@
     "@next/third-parties": "^15.0.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "axios": "^1.7.7",
+    "googletagmanager": "^1.0.2",
     "lodash": "^4.17.21",
     "mongodb": "^6.10.0",
     "next": "15.0.2",
