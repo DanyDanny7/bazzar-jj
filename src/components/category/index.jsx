@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import get from "lodash/get";
 import map from "lodash/map";
 
-export default function Example({ data }) {
+export default function Category({ data }) {
     const router = useRouter()
     const { category } = router.query;
 
