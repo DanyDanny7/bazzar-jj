@@ -1,7 +1,7 @@
 const navigation = {
     main: [
         //{ name: 'Atencion al Cliente', href: '/atencion-al-cliente' },
-        { name: 'Política de devoluciones', href: '/politica-de-devolucion' },
+        { name: 'Políticas Generales', href: '/politica-generales' },
         { name: 'Atencion al Cliente', href: '/atencion-al-cliente' },
         { name: 'Envíos y devoluciones', href: '/envio-devolucion' },
         { name: 'Métodos de pago', href: '/metodos-de-pagos' },
