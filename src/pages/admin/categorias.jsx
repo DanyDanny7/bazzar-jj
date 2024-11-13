@@ -1,14 +1,13 @@
 import React from 'react';
 import Layout from "@/components/layout";
+import axios from "axios";
 
-const Admin = () => {
-    return (
-        <Layout>
-            <div>
-                Admin Categorias
-            </div>
-        </Layout>
-    )
-}
+import AdminComponent from "@/components/admin"
+
+const Admin = () => (
+    <Layout>
+        <AdminComponent />
+    </Layout>
+)
 
 export default Admin
