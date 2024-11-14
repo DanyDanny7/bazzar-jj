@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toString from "lodash/toString";
+import isEmpty from "lodash/isEmpty";
 import Form from "./Form";
+import Modal from "./Modal";
 
 const Tabla = () => {
     const [categories, setCategories] = useState([]);
-    const [openForm, setOpenForm] = useState(false);
     const [edit, setEdit] = useState({})
+    const [open, setOpen] = useState(false)
+
 
     const getCategories = async () => {
         try {
@@ -17,7 +20,7 @@ const Tabla = () => {
         }
     }
 
-    const setCategory = async (values) => {
+    const postCategory = async (values) => {
         try {
             const body = {
                 slug: values.slug,
@@ -27,7 +30,24 @@ const Tabla = () => {
                 active: toString(values.active),
             }
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
-            setOpenForm(false)
+            setOpen(false)
+            getCategories()
+        } catch (error) {
+            console.log({ error })
+        }
+    }
+    const putCategory = async (values) => {
+        try {
+            const body = {
+                _id: values._id,
+                slug: values.slug,
+                nombre: values.nombre,
+                imagen: values.imagen,
+                type: values.type,
+                active: toString(values.active),
+            }
+            const resp = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
+            setOpen(false)
             getCategories()
         } catch (error) {
             console.log({ error })
@@ -36,7 +56,11 @@ const Tabla = () => {
 
     const onSubmit = (values) => (e) => {
         e.preventDefault();
-        setCategory(values)
+        if (isEmpty(edit)) {
+            postCategory(values)
+        } else {
+            putCategory(values)
+        }
     }
 
 
@@ -45,11 +69,11 @@ const Tabla = () => {
     }, [])
 
     const onClick = () => {
-        setOpenForm(state => !state)
+        setOpen(state => !state)
     }
     const onEdit = (category) => () => {
         setEdit(category);
-        setOpenForm(true)
+        setOpen(true)
     }
 
     return (
@@ -61,19 +85,18 @@ const Tabla = () => {
                     </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    {!openForm &&
-                        <button
-                            onClick={onClick}
-                            type="button"
-                            className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        >
-                            Añadir
-                        </button>
-                    }
-
+                    <button
+                        onClick={onClick}
+                        type="button"
+                        className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        Añadir
+                    </button>
                 </div>
             </div>
-            <Form onSubmit={onSubmit} edit={edit} className={openForm ? "overflow-auto" : `h-0 overflow-hidden`} setOpenForm={setOpenForm} />
+            <Modal setOpen={setOpen} open={open} edit={!isEmpty(edit)}>
+                <Form onSubmit={onSubmit} edit={edit} className={open ? "overflow-auto" : `h-0 overflow-hidden`} setOpen={setOpen} setEdit={setEdit} />
+            </Modal>
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -84,9 +107,6 @@ const Tabla = () => {
                                         Foto
                                     </th>
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        ID
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Slug
                                     </th>
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -94,6 +114,9 @@ const Tabla = () => {
                                     </th>
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Tipo
+                                    </th>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Activo
                                     </th>
                                     <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
                                         <span className="sr-only">Edit</span>
@@ -106,10 +129,10 @@ const Tabla = () => {
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
                                             <img src={category.imagen} className="h-10 w-10 rounded-full" />
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category._id}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.slug}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.nombre}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.type}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.active === "true" ? "Si" : "No"}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                                             <button className="text-indigo-600 hover:text-indigo-900" onClick={onEdit(category)}>
                                                 Edit<span className="sr-only">, {category.name}</span>

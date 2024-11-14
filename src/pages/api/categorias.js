@@ -59,9 +59,51 @@ export default async (req, res) => {
         }
 
 
-    } else {
-        res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
     }
+    if (req.method === 'PUT') {
+
+        try {
+            const body = req.body
+
+            // Connect to the Atlas cluster
+            await client.connect();
+            // Get the database and collection on which to run the operation
+            const db = client.db("Bazzar-JJ");
+            const col = db.collection("categorias");
+            // Create new documents                                                                                                                                         
+            const categoryDocument = [body]
+            // Insert the documents into the specified collection     
+
+            const filter = { slug: body.slug };
+            // update the value of the 'quantity' field to 5
+            const updateDocument = {
+                $set: {
+                    nombre: body.nombre,
+                    imagen: body.imagen,
+                    type: body.type,
+                    active: body.active,
+                },
+                $currentDate: { lastUpdated: true }
+            };
+
+            const p = await col.updateOne(filter, updateDocument);
+
+            return res.status(200).json(p)
+        } catch (err) {
+            return res.status(400).json(err.stack)
+        }
+
+        finally {
+            await client.close();
+        }
+
+
+    }
+
+
+    // else {
+    //     res.setHeader('Allow', ['POST']);
+    //     res.status(405).end(`Method ${req.method} Not Allowed`);
+    // }
 }
 
