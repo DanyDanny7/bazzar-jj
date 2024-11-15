@@ -4,12 +4,20 @@ import toString from "lodash/toString";
 import isEmpty from "lodash/isEmpty";
 import Form from "./Form";
 import Modal from "./Modal";
+import Confirm from "./Confirm";
+import Button from "@/components/util/Button";
 
 const Tabla = () => {
     const [categories, setCategories] = useState([]);
-    const [edit, setEdit] = useState({})
-    const [open, setOpen] = useState(false)
+    const [toEdit, setToEdit] = useState({});
+    const [toDelete, setToDelete] = useState({});
+    const [open, setOpen] = useState(false);
+    const [confirm, setConfirm] = useState(false);
+    const [postLoad, setPostLoad] = useState(false);
+    const [putLoad, setPutLoad] = useState(false);
+    const [deleteLoad, setDeleteLoad] = useState(false);
 
+    console.log({postLoad, putLoad, deleteLoad})
 
     const getCategories = async () => {
         try {
@@ -21,6 +29,7 @@ const Tabla = () => {
     }
 
     const postCategory = async (values) => {
+        setPostLoad(true);
         try {
             const body = {
                 slug: values.slug,
@@ -32,11 +41,15 @@ const Tabla = () => {
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
             setOpen(false)
             getCategories()
+            setPostLoad(false);
         } catch (error) {
             console.log({ error })
+            setPostLoad(false);
         }
     }
     const putCategory = async (values) => {
+        setPutLoad(true);
+        console.log("put")
         try {
             const body = {
                 _id: values._id,
@@ -46,19 +59,36 @@ const Tabla = () => {
                 type: values.type,
                 active: toString(values.active),
             }
-            const resp = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
+            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
             setOpen(false)
             getCategories()
+            setPutLoad(false);
         } catch (error) {
             console.log({ error })
+            setPutLoad(false);
+        }
+    }
+    const deleteCategory = async (values) => {
+        setDeleteLoad(true);
+        try {
+            const params = { slug: values.slug }
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, { params })
+            setOpen(false)
+            getCategories();
+            setDeleteLoad(false);
+        } catch (error) {
+            console.log({ error })
+            setDeleteLoad(false);
         }
     }
 
     const onSubmit = (values) => (e) => {
         e.preventDefault();
-        if (isEmpty(edit)) {
+        if (isEmpty(toEdit)) {
+            console.log("edit")
             postCategory(values)
         } else {
+            console.log("post")
             putCategory(values)
         }
     }
@@ -72,8 +102,17 @@ const Tabla = () => {
         setOpen(state => !state)
     }
     const onEdit = (category) => () => {
-        setEdit(category);
+        setToEdit(category);
         setOpen(true)
+    }
+
+    const confirmDelete = () => {
+        deleteCategory(toDelete);
+        setConfirm(false)
+    }
+    const onDelete = (category) => () => {
+        setToDelete(category)
+        setConfirm(true)
     }
 
     return (
@@ -85,17 +124,24 @@ const Tabla = () => {
                     </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button
+                    <Button
                         onClick={onClick}
                         type="button"
-                        className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        btnClass="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         Añadir
-                    </button>
+                    </Button>
                 </div>
             </div>
-            <Modal setOpen={setOpen} open={open} edit={!isEmpty(edit)}>
-                <Form onSubmit={onSubmit} edit={edit} className={open ? "overflow-auto" : `h-0 overflow-hidden`} setOpen={setOpen} setEdit={setEdit} />
+            <Modal setOpen={setOpen} open={open} edit={!isEmpty(toEdit)}>
+                <Form
+                    onSubmit={onSubmit}
+                    toEdit={toEdit}
+                    className={open ? "overflow-auto" : `h-0 overflow-hidden`}
+                    setOpen={setOpen}
+                    setToEdit={setToEdit}
+                    loading={postLoad || putLoad}
+                />
             </Modal>
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -134,9 +180,14 @@ const Tabla = () => {
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.type}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.active === "true" ? "Si" : "No"}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                                            <button className="text-indigo-600 hover:text-indigo-900" onClick={onEdit(category)}>
+                                            <Button btnClass="text-indigo-600 hover:text-indigo-900 border border-gray-300 py-1" onClick={onEdit(category)}>
                                                 Edit<span className="sr-only">, {category.name}</span>
-                                            </button>
+                                            </Button>
+                                        </td>
+                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
+                                            <Button btnClass="text-indigo-600 hover:text-indigo-900 border border-gray-300 py-1" onClick={onDelete(category)}>
+                                                Borrar<span className="sr-only">, {category.name}</span>
+                                            </Button>
                                         </td>
                                     </tr>
                                 ))}
@@ -145,6 +196,7 @@ const Tabla = () => {
                     </div>
                 </div>
             </div>
+            <Confirm open={confirm} onConfirm={confirmDelete} onCancel={() => setConfirm(false)} />
         </div>
     )
 }

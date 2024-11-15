@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import isEmpty from "lodash/isEmpty";
+import Button from "@/components/util/Button";
 
 const defaultValues = {
     _id: null,
@@ -10,16 +11,17 @@ const defaultValues = {
     active: false
 }
 
-const Form = ({ className, setOpen, onSubmit, edit, setEdit}) => {
+const Form = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading }) => {
+    console.log(loading)
     const [values, setValues] = useState(defaultValues);
 
-    const isEdit = !isEmpty(edit)
+    const isEdit = !isEmpty(toEdit)
 
     useEffect(() => {
-        if (!isEmpty(edit)) {
-            setValues(edit)
+        if (!isEmpty(toEdit)) {
+            setValues(toEdit)
         }
-    }, [JSON.stringify(edit)])
+    }, [JSON.stringify(toEdit)])
 
 
     const onChange = (e) => {
@@ -31,7 +33,7 @@ const Form = ({ className, setOpen, onSubmit, edit, setEdit}) => {
     const onCancel = () => {
         setOpen(false);
         setValues(defaultValues);
-        setEdit({})
+        setToEdit({})
     }
 
     return (
@@ -106,7 +108,7 @@ const Form = ({ className, setOpen, onSubmit, edit, setEdit}) => {
                                         name="active"
                                         type="checkbox"
                                         className="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                        checked={!!(values.active === "true")}
+                                        defaultChecked={!!(values.active === "true")}
                                         onChange={onChange}
                                     />
                                 </div>
@@ -132,15 +134,16 @@ const Form = ({ className, setOpen, onSubmit, edit, setEdit}) => {
                 </div>
 
                 <div className="mt-6 flex items-end justify-start gap-x-6 w-full md:w-1/2 ml-auto">
-                    <button type="button" className="w-full border px-3 py-2 rounded-md text-sm/6 font-semibold text-gray-900 " onClick={onCancel}>
+                    <Button type="button" btnClass="w-full border px-3 py-2 rounded-md text-sm/6 font-semibold text-gray-900 " onClick={onCancel}>
                         Cancelar
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type="submit"
-                        className="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        btnClass="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        loading={loading}
                     >
                         Guardar
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>
