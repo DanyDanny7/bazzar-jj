@@ -12,11 +12,6 @@ const defaultValues = {
 }
 
 const Form = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading }) => {
-    console.log(loading)
-    console.log(loading)
-    console.log(loading)
-    console.log(loading)
-
     const [values, setValues] = useState(defaultValues);
 
     const isEdit = !isEmpty(toEdit)
