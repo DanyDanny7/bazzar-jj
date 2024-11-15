@@ -37,7 +37,7 @@ const AtencionAlCliente = () => {
                 </address>
               </div>
               <div>
-                <h3 className="border-l border-indigo-600 pl-6 font-semibold text-gray-900">TickTock</h3>
+                <h3 className="border-l border-indigo-600 pl-6 font-semibold text-gray-900">TikTok</h3>
                 <address className="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600">
                   <p>bazzar_fashonJJ</p>
                   <p>ya vamos a ver que ponemos</p>
