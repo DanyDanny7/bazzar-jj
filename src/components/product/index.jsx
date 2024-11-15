@@ -110,6 +110,28 @@ export default function Example({ product }) {
     const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes?.[2])
 
+
+    const handleColorChange = (color) => {
+        setSelectedColor(color);
+      };
+    
+      const handleSizeChange = (size) => {
+        setSelectedSize(size);
+      };
+    
+      const handleWhatsAppClick = () => {
+        // Validate selections before sending message
+        if (!selectedColor || !selectedSize) {
+          alert("Por favor, selecciona un color y una talla.");
+          return; // Prevent sending an incomplete message
+        }
+    
+        const message = `Quiero pedir el producto en color ${selectedColor.name} y talla ${selectedSize.name}.`;
+        const whatsappUrl = `http://wa.me/+50374887511?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+      };
+    
+
     return (
         <div className="bg-white">
             <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
@@ -203,12 +225,25 @@ export default function Example({ product }) {
                             </fieldset>
                         </div>
 
-                        <button
-                            type="submit"
-                            className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                 
+                       
+                            <a
+                             onClick={handleWhatsAppClick} disabled={!selectedColor || !selectedSize}
+                                className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-700 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700   
+                                            focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"   
+                                           
+
                         >
-                            Add to cart
-                        </button>
+                                                            {/* Display product details */}
+                                    {/* ... your color selection component using handleColorChange */}
+                                    {/* ... your size selection component using handleSizeChange */}
+                                    <button >
+                                        Pedir por WhatsApp
+                                    </button>
+                        </a>
+
+
+
                     </form>
 
                     {/* Product details */}
