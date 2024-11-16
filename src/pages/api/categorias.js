@@ -1,7 +1,6 @@
 import mongoClient, { uri } from "../../lib/mongodb";
 const { MongoClient } = require("mongodb");
 
-
 export default async (req, res) => {
     const client = new MongoClient(uri);
     const params = req.query;
@@ -31,22 +30,13 @@ export default async (req, res) => {
 
         try {
             const body = req.body
-
             // Connect to the Atlas cluster
             await client.connect();
             // Get the database and collection on which to run the operation
             const db = client.db("Bazzar-JJ");
             const col = db.collection("categorias");
             // Create new documents                                                                                                                                         
-            const categoryDocument = [body]
-            // Insert the documents into the specified collection        
-            const p = await col.insertMany(categoryDocument);
-            // // Find the document
-            // const filter = { "name.last": "Turing" };
-            // const document = await col.findOne(filter);
-            // Print results
-            // console.log("Document found:\n" + JSON.stringify(document));
-
+            const p = await col.insertOne(body);
 
             return res.status(200).json(p)
         } catch (err) {
@@ -56,7 +46,6 @@ export default async (req, res) => {
         finally {
             await client.close();
         }
-
 
     }
     else if (req.method === 'PUT') {
@@ -73,6 +62,7 @@ export default async (req, res) => {
                     imagen: body.imagen,
                     type: body.type,
                     active: body.active,
+                    products: []
                 },
                 $currentDate: { lastUpdated: true }
             };
@@ -95,9 +85,14 @@ export default async (req, res) => {
             await client.connect();
             const db = client.db("Bazzar-JJ");
             const col = db.collection("categorias");
-            const resp = await col.deleteOne({ slug });
+            const respCat = await col.deleteOne({ slug });
 
-            return res.status(200).json(resp)
+            // elimina masivamente los productos asocialdos a la categoría
+            const products = db.collection("productos");
+            const respProd = await products.deleteMany({ category: slug });
+
+
+            return res.status(200).json({ respCat, respProd })
         } catch (err) {
             return res.status(400).json(err.stack)
         }

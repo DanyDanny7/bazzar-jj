@@ -157,7 +157,7 @@ const DropZone = ({ setProducts, module, getFile, type = 1, edit }) => {
                 <div className='flex-1'>
                     <input {...getInputProps()} />
                     <div {...getRootProps()} >
-                        <div className='h-[150px] w-full border rounded-sm p-2 cursor-pointer flex justify-center flex-col items-center'>
+                        <div className='h-[250px] w-full border rounded-sm p-2 cursor-pointer flex justify-center flex-col items-center'>
                             <svg className="w-[112px] h-[112px] mb-4" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg" >
                                 <rect width="112" height="112" rx="56" fill="#EDFFFD" />
                                 <g clipPath="url(#clip0_266_22168)">
@@ -176,8 +176,7 @@ const DropZone = ({ setProducts, module, getFile, type = 1, edit }) => {
                                     <br />
                                 </>
                                 : <div>
-                                    texto start
-                                    completado
+                                    Haz click aquí o arrastra tu archivo CSV <br />con los productos a cargar en esta categoría .
                                 </div>
                             }
                         </div>

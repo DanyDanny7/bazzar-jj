@@ -1,12 +1,10 @@
 'use client'
-
-import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Button from "@/components/util/Button";
+import get from "lodash/get";
 
-export default function Example({ open, onConfirm, onCancel, loading }) {
-
+const Confirm = ({ open, toDelete, onConfirm, onCancel, loading }) => {
     return (
         <Dialog open={open} onClose={onCancel} className="relative z-10">
             <DialogBackdrop
@@ -25,12 +23,12 @@ export default function Example({ open, onConfirm, onCancel, loading }) {
                                 <ExclamationTriangleIcon aria-hidden="true" className="size-6 text-red-600" />
                             </div>
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
-                                    Eliminar categoría
+                                <DialogTitle as="h3" className="text-base font-normal text-gray-900">
+                                    <span>¿Desea eliminar categoría<strong className='pl-2'>{get(toDelete, "nombre", "")}</strong>?</span>
                                 </DialogTitle>
                                 <div className="mt-2">
                                     <p className="text-sm text-gray-500">
-                                        ¿Desea eliminar esta categoría?
+                                        Al eliminar la categoría<strong className='px-2'>{get(toDelete, "nombre", "")}</strong>se eliminarán<strong className='px-1'>{get(toDelete, "products.length")}</strong>productos asociados.
                                     </p>
                                 </div>
                             </div>
@@ -42,7 +40,7 @@ export default function Example({ open, onConfirm, onCancel, loading }) {
                                 btnClass="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                                 loading={loading}
                             >
-                                Confirmar
+                                Eliminar categoría <strong className='pl-2'>{get(toDelete, "nombre", "")}</strong>
                             </Button>
                             <button
                                 type="button"
@@ -59,3 +57,4 @@ export default function Example({ open, onConfirm, onCancel, loading }) {
         </Dialog>
     )
 }
+export default Confirm;

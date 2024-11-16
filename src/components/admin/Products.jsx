@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TableProducts from "./TableProducts";
+import get from "lodash/get";
 
 const Products = ({ toEdit }) => {
     return (
