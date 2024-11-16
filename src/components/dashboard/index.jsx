@@ -15,7 +15,7 @@ const Dashboard = ({ data }) => (
         <div aria-hidden="true" className="relative">
             <img
                 alt=""
-                src="https://tailwindui.com/plus/img/ecommerce-images/product-feature-02-full-width.jpg"
+                src="https://i.pinimg.com/736x/63/03/84/6303846a344c887ec462d3dee0c828fb.jpg"
                 className="h-96 w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white" />

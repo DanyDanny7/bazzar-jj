@@ -83,7 +83,7 @@ export default function Example() {
 
                     ))}
                 </div>
-                <p className="mt-10 text-center text-sm/6 text-gray-600">&copy; 2024 Bazar JJ, Inc. All rights reserved.</p>
+                <p className="mt-10 text-center text-sm/6 text-gray-600">&copy; 2024 Bazar Fashion JJ, Inc. All rights reserved.</p>
             </div>
         </footer>
     )
