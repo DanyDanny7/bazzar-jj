@@ -31,6 +31,12 @@ const Tabla = () => {
         }
     }
 
+    const reload = () => {
+        getCategories();
+        setOpen(false)
+        setPostLoad(false);
+    }
+
     const postCategory = async (values) => {
         setPostLoad(true);
         try {
@@ -42,9 +48,7 @@ const Tabla = () => {
                 active: toString(values.active),
             }
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
-            setOpen(false)
-            getCategories()
-            setPostLoad(false);
+            reload()
         } catch (error) {
             console.log({ error })
             setPostLoad(false);
@@ -62,9 +66,7 @@ const Tabla = () => {
                 active: toString(values.active),
             }
             await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
-            setOpen(false)
-            getCategories()
-            setPutLoad(false);
+            reload()
         } catch (error) {
             console.log({ error })
             setPutLoad(false);
@@ -75,9 +77,7 @@ const Tabla = () => {
         try {
             const params = { slug: values.slug }
             await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, { params })
-            setOpen(false)
-            getCategories();
-            setDeleteLoad(false);
+            reload()
         } catch (error) {
             console.log({ error })
             setDeleteLoad(false);
@@ -93,29 +93,24 @@ const Tabla = () => {
         }
     }
 
-
     useEffect(() => {
-        getCategories()
+        reload()
     }, [])
 
-    const onAdd = () => {
-        setOpen(state => !state)
-    }
-    // const onEdit = (category) => () => {
-    //     setToEdit(category);
-    //     setOpen(true)
-    // }
+
+    const onAdd = () => setOpen(state => !state)
+
     const onEdit = (category) => (e) => {
         e.preventDefault();
         setToEdit(category);
         setOpen(true)
     }
-    const onAddDetail = (category) => (e) => {
+    const addNewProducts = (category) => (e) => {
         e.preventDefault();
         setToEdit(category);
         setAddProducts(true)
     }
-    const onDetail = (category) => (e) => {
+    const showProducts = (category) => (e) => {
         e.preventDefault();
         setToEdit(category);
         setProducts(true)
@@ -123,9 +118,10 @@ const Tabla = () => {
 
     const confirmDelete = () => {
         deleteCategory(toDelete);
-        setConfirm(false)
-        setToEdit({})
-        setToDelete({})
+        setConfirm(false);
+        setToEdit({});
+        setToDelete({});
+        reload();
     }
     const onDelete = (category) => (e) => {
         e.preventDefault();
@@ -156,10 +152,10 @@ const Tabla = () => {
                 />
             </Modal>
             <Modal setOpen={onCancel} open={products} edit={!isEmpty(toEdit)}>
-                <Products toEdit={toEdit} />
+                <Products toEdit={toEdit} onCancel={onCancel} />
             </Modal>
             <Modal setOpen={onCancel} open={addProducts} edit={!isEmpty(toEdit)}>
-                <AddProducts toEdit={toEdit} />
+                <AddProducts toEdit={toEdit} onCancel={onCancel} />
             </Modal>
 
             <div className="sm:flex sm:items-center">
@@ -169,16 +165,12 @@ const Tabla = () => {
                     </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <Button
-                        onClick={onAdd}
-                        type="button"
-                        btnClass="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
+                    <Button onClick={onAdd} type="button" variant="contained">
                         Agregar Categoría
                     </Button>
                 </div>
             </div>
-            <Table onEdit={onEdit} onDelete={onDelete} onDetail={onDetail} categories={categories} onAdd={onAdd} onAddDetail={onAddDetail} />
+            <Table onEdit={onEdit} onDelete={onDelete} showProducts={showProducts} categories={categories} onAdd={onAdd} addNewProducts={addNewProducts} />
             <Confirm toDelete={toDelete} open={confirm} onConfirm={confirmDelete} onCancel={onCancel} loading={deleteLoad} />
         </div>
     )

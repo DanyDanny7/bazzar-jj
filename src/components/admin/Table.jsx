@@ -4,7 +4,7 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import Empty from "@/components/util/Empty";
 import isEmpty from 'lodash/isEmpty';
 
-const Table = ({ onEdit, onDelete, onDetail, categories, onAdd, onAddDetail }) => {
+const Table = ({ onEdit, onDelete, showProducts, categories, onAdd, addNewProducts }) => {
     return (
         <div className="mt-8 flow-root">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -67,7 +67,7 @@ const Table = ({ onEdit, onDelete, onDetail, categories, onAdd, onAddDetail }) =
                                                 </MenuItem>
                                                 <MenuItem>
                                                     <button
-                                                        onClick={onAddDetail(category)}
+                                                        onClick={addNewProducts(category)}
                                                         type="button"
                                                         className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                                                     >
@@ -76,7 +76,7 @@ const Table = ({ onEdit, onDelete, onDetail, categories, onAdd, onAddDetail }) =
                                                 </MenuItem>
                                                 <MenuItem>
                                                     <button
-                                                        onClick={onDetail(category)}
+                                                        onClick={showProducts(category)}
                                                         type="button"
                                                         className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                                                     >

@@ -22,7 +22,6 @@ const Form = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading }) => {
         }
     }, [JSON.stringify(toEdit)])
 
-
     const onChange = (e) => {
         setValues(state => ({
             ...state,
@@ -38,7 +37,7 @@ const Form = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading }) => {
     return (
         <div className={className} onSubmit={onSubmit(values)}>
             <form >
-                <div className="space-y-6">
+                <div className="space-y-6 min-h-[200px]">
                     <div className="pb-6">
                         <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 justify-start">
                             <div className="sm:col-span-2">
@@ -133,14 +132,10 @@ const Form = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading }) => {
                 </div>
 
                 <div className="mt-6 flex items-end justify-start gap-x-6 w-full md:w-1/2 ml-auto">
-                    <Button type="button" btnClass="w-full border px-3 py-2 rounded-md text-sm/6 font-semibold text-gray-900 " onClick={onCancel}>
+                    <Button type="button" onClick={onCancel}>
                         Cancelar
                     </Button>
-                    <Button
-                        type="submit"
-                        btnClass="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        loading={loading}
-                    >
+                    <Button type="submit" variant="contained" loading={loading}>
                         Guardar
                     </Button>
                 </div>

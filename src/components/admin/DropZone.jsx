@@ -1,62 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useState, useEffect } from 'react'
-import { isEmpty, get, includes, map, split, trim, capitalize, lowerCase } from 'lodash';
+import React, { useCallback, useState } from 'react'
+import { get, includes, map, split, trim, capitalize, lowerCase } from 'lodash';
 import { useDropzone } from 'react-dropzone'
 import * as XLSX from 'xlsx';
 
-// import {
-//     Paper,
-//     div,
-//     Typography,
-//     SvgIcon,
-//     Button,
-//     Stack,
-//     Table,
-//     TableBody,
-//     TableCell,
-//     TableContainer,
-//     TableHead,
-//     TableRow,
-// } from '@mui/material';
-// import { useDispatch, useSelector } from "react-redux";
-import TableProducts from "./TableProducts";
-import Button from "@/components/util/Button";
-
-// import Notification from "../../../components/form/Notification"
-// import { getInventaryDetail } from "../../../store/inventary/thunk/getInventary/detail/getDetails";
 
 const DropZone = ({ setProducts, module, getFile, type = 1, edit }) => {
-    // const dispatch = useDispatch();
-
-    const [file, setFile] = useState({});
     const [showNoti, setShowNoti] = useState({ open: false, msg: "", variant: "" })
-    // const [products, setProducts] = useState([])
-    const [oldProducts, setOldProducts] = useState([])
-
-    // const inventaryDetailState = useSelector(state => state.inventary.inventary.detail);
-
-    // useEffect(() => {
-    //     if (inventaryDetailState.isSuccess) {
-    //         console.log(get(inventaryDetailState, "data.data"))
-    //         setOldProducts(get(inventaryDetailState, "data.data.countsTemplate"))
-    //     } else {
-    //         setOldProducts([])
-    //     }
-    // }, [inventaryDetailState.isLoading])
-
-
-
-    const getData = ({ page }) => {
-        // const filters = { page, inventoryid: get(edit, "item.inventoryId") }
-        // dispatch(getInventaryDetail(filters))
-    }
-
-    // useEffect(() => {
-    //     if (type === 2) {
-    //         getData({ page: 1 })
-    //     }
-    // }, [dispatch])
-
 
     const onDrop = useCallback((acceptedFiles, e) => {
         try {
@@ -73,8 +22,6 @@ const DropZone = ({ setProducts, module, getFile, type = 1, edit }) => {
                         const wsname = wb.SheetNames[0];
                         const ws = wb.Sheets[wsname];
                         const toJson = XLSX.utils.sheet_to_json(ws);
-
-
 
                         const list = map(toJson, (p) => {
                             return ({
@@ -145,61 +92,38 @@ const DropZone = ({ setProducts, module, getFile, type = 1, edit }) => {
     }, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    const deleteFile = () => {
-        // setFile(null)
-        // getFile(null)
-        setProducts([])
-    }
-
     return (
         <div className='flex flex-col justify-between gap-4'>
-            {(isEmpty(file) || type === 2) &&
-                <div className='flex-1'>
-                    <input {...getInputProps()} />
-                    <div {...getRootProps()} >
-                        <div className='h-[250px] w-full border rounded-sm p-2 cursor-pointer flex justify-center flex-col items-center'>
-                            <svg className="w-[112px] h-[112px] mb-4" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                                <rect width="112" height="112" rx="56" fill="#EDFFFD" />
-                                <g clipPath="url(#clip0_266_22168)">
-                                    <path d="M61.3334 29.3333H40.0001C37.0667 29.3333 34.6934 31.7333 34.6934 34.6666L34.6667 77.3333C34.6667 80.2666 37.0401 82.6666 39.9734 82.6666H72.0001C74.9334 82.6666 77.3334 80.2666 77.3334 77.3333V45.3333L61.3334 29.3333ZM72.0001 77.3333H40.0001V34.6666H58.6667V48H72.0001V77.3333ZM45.3334 64.0266L49.0934 67.7866L53.3334 63.5733V74.6666H58.6667V63.5733L62.9067 67.8133L66.6667 64.0266L56.0267 53.3333L45.3334 64.0266Z" fill="#13BFA8" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_266_22168">
-                                        <rect width="64" height="64" fill="white" transform="translate(24 24)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
+            <div className='flex-1'>
+                <input {...getInputProps()} />
+                <div {...getRootProps()} >
+                    <div className='h-[250px] w-full border rounded-sm p-2 cursor-pointer flex justify-center flex-col items-center'>
+                        <svg className="w-[112px] h-[112px] mb-4" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                            <rect width="112" height="112" rx="56" fill="#EDFFFD" />
+                            <g clipPath="url(#clip0_266_22168)">
+                                <path d="M61.3334 29.3333H40.0001C37.0667 29.3333 34.6934 31.7333 34.6934 34.6666L34.6667 77.3333C34.6667 80.2666 37.0401 82.6666 39.9734 82.6666H72.0001C74.9334 82.6666 77.3334 80.2666 77.3334 77.3333V45.3333L61.3334 29.3333ZM72.0001 77.3333H40.0001V34.6666H58.6667V48H72.0001V77.3333ZM45.3334 64.0266L49.0934 67.7866L53.3334 63.5733V74.6666H58.6667V63.5733L62.9067 67.8133L66.6667 64.0266L56.0267 53.3333L45.3334 64.0266Z" fill="#13BFA8" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_266_22168">
+                                    <rect width="64" height="64" fill="white" transform="translate(24 24)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
 
+                        <div className='min-h-[100px]'>
                             {isDragActive
                                 ? <>
-                                    texto activo
+                                    Suelta tu CSV asquí.
                                     <br />
                                 </>
                                 : <div>
-                                    Haz click aquí o arrastra tu archivo CSV <br />con los productos a cargar en esta categoría .
+                                    Haz click aquí o arrastra tu archivo CSV <br />con los productos a cargar en esta categoría.
                                 </div>
                             }
                         </div>
                     </div>
-                </div >
-            }
-            {/* {console.log(file)} */}
-            {/* <div className='min-h-[250px] w-full'>
-                <div className="border p-1 h-full">
-
-                    {!isEmpty(products) &&
-                        <>
-                            <div className='flex flex-row justify-between items-end'>
-                                <div>Recargar</div>
-                                {!isEmpty(products) &&
-                                    <Button className="mb-1" onClick={deleteFile}>Limpiar</Button>
-                                }
-                            </div>
-                            <TableProducts products={products} />
-                        </>
-                    }
-                </ div>
-            </div> */}
+                </div>
+            </div >
         </div>
     )
 }
