@@ -126,8 +126,10 @@ export default function Example({ product }) {
           return; // Prevent sending an incomplete message
         }
     
-        const message = `Quiero pedir el producto en color ${selectedColor.name} y talla ${selectedSize.name}.`;
-        const whatsappUrl = `http://wa.me/+50374887511?text=${encodeURIComponent(message)}`;
+        const message = `Bienvenidos al whatsapp de Bazar Fashion JJ :
+        Quiero pedir el producto en color ${selectedColor.name} y 
+        talla ${selectedSize.name}.`;
+        const whatsappUrl = `http://wa.me/+50371368285?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
       };
     

@@ -9,8 +9,8 @@ const EnvioDevolucion = () => {
         <h2 className="text-2xl font-bold tracking-tight text-center mb-8">
           Políticas de Envío y Devolución
         </h2>
-
-        <div className="grid grid-cols-2 gap-8">
+        {/* este es para darle estilo a la informacion */}
+        <div className="grid grid-cols-1 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">Políticas de Envío</h3>
             <ul className="list-disc">
@@ -19,25 +19,21 @@ const EnvioDevolucion = () => {
                 <ul className="list-disc ml-4">
                   <li>Envío Estándar: Entrega dentro de 3 a 5 días hábiles. Ideal para pedidos que no requieren urgencia.</li>
                   <li>Envío Exprés: Entrega en 1 a 2 días hábiles. Perfecto para clientes que necesitan recibir sus productos rápidamente.</li>
-                  <li>Envío Same-Day: Ofrecer un servicio de entrega el mismo día para pedidos realizados antes de una hora específica. Esto puede ser atractivo para clientes locales.</li>
+                  <li>Envío Same-Day: Ofrecer un servicio de entrega el mismo día para pedidos realizados antes de una hora específica.</li>
                   <li>Retiro en Tienda: Permitir a los clientes la opción de recoger sus pedidos directamente en la tienda sin costo adicional.</li>
+                  <li>Flexibilidad en la entrega: En caso de que los clientes necesiten que se les realice la entrega del producto en un punto más accesible o en su lugar de trabajo, pueden optar por él envió flexible. </li>
                 </ul>
               </li>
               <li>
                 <strong>Costos de Envío</strong>
                 <ul className="list-disc ml-4">
-                  <li>Envío Estándar: $2.00 (envio gratis en pedidos superiores a $50).</li>
-                  <li>Envío Exprés: $3.00.</li>
+                  <li>Envío Estándar: $2.00 </li>
+                  <li>Envío Exprés y Flexible: $3.00.</li>
                   <li>Envío Same-Day: $2.00</li>
                   <li>Retiro en Tienda: Sin costo adicional.</li>
                 </ul>
               </li>
-              <li>
-                <strong>Flexibilidad en la Entrega</strong>
-                <ul className="list-disc ml-4">
-                  <li>Puntos de Recogida: Colaborar con tiendas locales o puntos de recogida donde los clientes puedan recoger sus pedidos si no están disponibles en casa.</li>
-                </ul>
-              </li>
+              
             </ul>
           </div>
           <div>
@@ -46,7 +42,7 @@ const EnvioDevolucion = () => {
               <li>
                 <strong>Derecho de Devolución</strong>
                 <ul className="list-disc ml-4">
-                  <li>Los clientes tienen derecho a devolver cualquier producto adquirido en nuestra tienda online dentro de un plazo de 3 o 5 días hábiles desde la recepción del pedido, sin necesidad de justificar el motivo de la devolución.</li>
+                  <li>Los clientes tienen derecho a devolver cualquier producto adquirido en nuestra tienda online dentro de un plazo de 3 o 5 días hábiles desde la recepción del pedido. </li>
                 </ul>
               </li>
               <li>
