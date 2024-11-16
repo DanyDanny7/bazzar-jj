@@ -3,13 +3,22 @@ import axios from "axios";
 import toString from "lodash/toString";
 import isEmpty from "lodash/isEmpty";
 import Form from "./Form";
+import Products from "./Products";
 import Modal from "./Modal";
+import Confirm from "./Confirm";
+import Table from "./Table";
+import Button from "@/components/util/Button";
 
 const Tabla = () => {
     const [categories, setCategories] = useState([]);
-    const [edit, setEdit] = useState({})
-    const [open, setOpen] = useState(false)
-
+    const [toEdit, setToEdit] = useState({});
+    const [toDelete, setToDelete] = useState({});
+    const [open, setOpen] = useState(false);
+    const [prodcuts, setProducts] = useState(false);
+    const [confirm, setConfirm] = useState(false);
+    const [postLoad, setPostLoad] = useState(false);
+    const [putLoad, setPutLoad] = useState(false);
+    const [deleteLoad, setDeleteLoad] = useState(false);
 
     const getCategories = async () => {
         try {
@@ -21,6 +30,7 @@ const Tabla = () => {
     }
 
     const postCategory = async (values) => {
+        setPostLoad(true);
         try {
             const body = {
                 slug: values.slug,
@@ -32,11 +42,14 @@ const Tabla = () => {
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
             setOpen(false)
             getCategories()
+            setPostLoad(false);
         } catch (error) {
             console.log({ error })
+            setPostLoad(false);
         }
     }
     const putCategory = async (values) => {
+        setPutLoad(true);
         try {
             const body = {
                 _id: values._id,
@@ -46,17 +59,32 @@ const Tabla = () => {
                 type: values.type,
                 active: toString(values.active),
             }
-            const resp = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
+            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
             setOpen(false)
             getCategories()
+            setPutLoad(false);
         } catch (error) {
             console.log({ error })
+            setPutLoad(false);
+        }
+    }
+    const deleteCategory = async (values) => {
+        setDeleteLoad(true);
+        try {
+            const params = { slug: values.slug }
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, { params })
+            setOpen(false)
+            getCategories();
+            setDeleteLoad(false);
+        } catch (error) {
+            console.log({ error })
+            setDeleteLoad(false);
         }
     }
 
     const onSubmit = (values) => (e) => {
         e.preventDefault();
-        if (isEmpty(edit)) {
+        if (isEmpty(toEdit)) {
             postCategory(values)
         } else {
             putCategory(values)
@@ -68,16 +96,54 @@ const Tabla = () => {
         getCategories()
     }, [])
 
-    const onClick = () => {
+    const onAdd = () => {
         setOpen(state => !state)
     }
     const onEdit = (category) => () => {
-        setEdit(category);
+        setToEdit(category);
         setOpen(true)
+    }
+    const onDetail = (category) => () => {
+        setToEdit(category);
+        setProducts(true)
+    }
+
+    const confirmDelete = () => {
+        deleteCategory(toDelete);
+        setConfirm(false)
+        setToEdit({})
+        setToDelete({})
+    }
+    const onDelete = (category) => () => {
+        setToDelete(category)
+        setConfirm(true)
+    }
+
+    const onCancel = () => {
+        setToDelete({})
+        setToEdit({})
+        setOpen(false)
+        setProducts(false)
+        setConfirm(false)
     }
 
     return (
         <div className="px-4 sm:px-2 lg:px-0 py-4">
+
+            <Modal setOpen={onCancel} open={open} title={!isEmpty(toEdit) ? "Editar categoría" : "Crear categoría"}>
+                <Form
+                    onSubmit={onSubmit}
+                    toEdit={toEdit}
+                    className={open ? "overflow-auto" : `h-0 overflow-hidden`}
+                    setOpen={setOpen}
+                    setToEdit={setToEdit}
+                    loading={postLoad || putLoad}
+                />
+            </Modal>
+            <Modal setOpen={onCancel} open={prodcuts} edit={!isEmpty(toEdit)}>
+                <Products toEdit={toEdit} />
+            </Modal>
+
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
                     <h1 className="text-base font-semibold text-gray-900">Administrar Categorías</h1>
@@ -85,66 +151,17 @@ const Tabla = () => {
                     </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button
-                        onClick={onClick}
+                    <Button
+                        onClick={onAdd}
                         type="button"
-                        className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        btnClass="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        Añadir
-                    </button>
+                        Agregar Categoría
+                    </Button>
                 </div>
             </div>
-            <Modal setOpen={setOpen} open={open} edit={!isEmpty(edit)}>
-                <Form onSubmit={onSubmit} edit={edit} className={open ? "overflow-auto" : `h-0 overflow-hidden`} setOpen={setOpen} setEdit={setEdit} />
-            </Modal>
-            <div className="mt-8 flow-root">
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <table className="min-w-full divide-y divide-gray-300">
-                            <thead>
-                                <tr>
-                                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
-                                        Foto
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Slug
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Nombre
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Tipo
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Activo
-                                    </th>
-                                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                                        <span className="sr-only">Edit</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white">
-                                {categories.map((category) => (
-                                    <tr key={category._id} className="even:bg-gray-50">
-                                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                                            <img src={category.imagen} className="h-10 w-10 rounded-full" />
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.slug}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.nombre}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.type}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.active === "true" ? "Si" : "No"}</td>
-                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                                            <button className="text-indigo-600 hover:text-indigo-900" onClick={onEdit(category)}>
-                                                Edit<span className="sr-only">, {category.name}</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <Table onEdit={onEdit} onDelete={onDelete} onDetail={onDetail} categories={categories} onAdd={onAdd} />
+            <Confirm open={confirm} onConfirm={confirmDelete} onCancel={onCancel} loading={deleteLoad} />
         </div>
     )
 }

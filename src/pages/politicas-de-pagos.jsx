@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from "@/components/layout";
 
-const MetodosDePagos = () => {
+const PoliticasDePagos = () => {
   return (
     <Layout>
       <div>
@@ -44,4 +44,4 @@ const MetodosDePagos = () => {
   )
 }
 
-export default MetodosDePagos
+export default PoliticasDePagos
