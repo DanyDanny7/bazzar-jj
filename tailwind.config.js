@@ -8,6 +8,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        whatsapp: "#2ad366",
+        whatsapp_dark: "#23bb59",
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
