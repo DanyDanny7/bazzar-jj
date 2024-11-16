@@ -17,7 +17,7 @@ const PoliticasDePagos = () => {
               <div>
                 <h3 className="border-l border-indigo-600 pl-6 font-semibold text-gray-900">💳 Tarjetas de Débito y Crédito</h3>
                 <address className="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-                  <p>Aceptamos todas las tarjetas principales de débito y crédito (Visa, Mastercard, American Express, etc.). Puedes pagar de forma rápida y segura.</p>
+                  <p>En nuestro local, aceptamos todas las tarjetas principales de débito y crédito (Visa, Mastercard, American Express, etc.). Puedes pagar de forma rápida y segura.</p>
                   <p></p>
                 </address>
               </div>
