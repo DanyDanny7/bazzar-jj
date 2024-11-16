@@ -4,6 +4,7 @@ import toString from "lodash/toString";
 import isEmpty from "lodash/isEmpty";
 import Form from "./Form";
 import Products from "./Products";
+import AddProducts from "./AddProducts";
 import Modal from "./Modal";
 import Confirm from "./Confirm";
 import Table from "./Table";
@@ -14,7 +15,8 @@ const Tabla = () => {
     const [toEdit, setToEdit] = useState({});
     const [toDelete, setToDelete] = useState({});
     const [open, setOpen] = useState(false);
-    const [prodcuts, setProducts] = useState(false);
+    const [products, setProducts] = useState(false);
+    const [addProducts, setAddProducts] = useState(false);
     const [confirm, setConfirm] = useState(false);
     const [postLoad, setPostLoad] = useState(false);
     const [putLoad, setPutLoad] = useState(false);
@@ -99,11 +101,22 @@ const Tabla = () => {
     const onAdd = () => {
         setOpen(state => !state)
     }
-    const onEdit = (category) => () => {
+    // const onEdit = (category) => () => {
+    //     setToEdit(category);
+    //     setOpen(true)
+    // }
+    const onEdit = (category) => (e) => {
+        e.preventDefault();
         setToEdit(category);
         setOpen(true)
     }
-    const onDetail = (category) => () => {
+    const onAddDetail = (category) => (e) => {
+        e.preventDefault();
+        setToEdit(category);
+        setAddProducts(true)
+    }
+    const onDetail = (category) => (e) => {
+        e.preventDefault();
         setToEdit(category);
         setProducts(true)
     }
@@ -114,7 +127,8 @@ const Tabla = () => {
         setToEdit({})
         setToDelete({})
     }
-    const onDelete = (category) => () => {
+    const onDelete = (category) => (e) => {
+        e.preventDefault();
         setToDelete(category)
         setConfirm(true)
     }
@@ -123,6 +137,7 @@ const Tabla = () => {
         setToDelete({})
         setToEdit({})
         setOpen(false)
+        setAddProducts(false)
         setProducts(false)
         setConfirm(false)
     }
@@ -140,8 +155,11 @@ const Tabla = () => {
                     loading={postLoad || putLoad}
                 />
             </Modal>
-            <Modal setOpen={onCancel} open={prodcuts} edit={!isEmpty(toEdit)}>
+            <Modal setOpen={onCancel} open={products} edit={!isEmpty(toEdit)}>
                 <Products toEdit={toEdit} />
+            </Modal>
+            <Modal setOpen={onCancel} open={addProducts} edit={!isEmpty(toEdit)}>
+                <AddProducts toEdit={toEdit} />
             </Modal>
 
             <div className="sm:flex sm:items-center">
@@ -160,8 +178,8 @@ const Tabla = () => {
                     </Button>
                 </div>
             </div>
-            <Table onEdit={onEdit} onDelete={onDelete} onDetail={onDetail} categories={categories} onAdd={onAdd} />
-            <Confirm open={confirm} onConfirm={confirmDelete} onCancel={onCancel} loading={deleteLoad} />
+            <Table onEdit={onEdit} onDelete={onDelete} onDetail={onDetail} categories={categories} onAdd={onAdd} onAddDetail={onAddDetail} />
+            <Confirm toDelete={toDelete} open={confirm} onConfirm={confirmDelete} onCancel={onCancel} loading={deleteLoad} />
         </div>
     )
 }
