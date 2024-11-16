@@ -9,7 +9,7 @@ const AtencionAlCliente = () => {
         <div className="bg-white py-24 sm:py-7">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl lg:mx-0">
-              <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Contáctenos</h2>
+              <h2 className="text-xl font-bold mb-4">Contáctenos</h2>
               <p className="mt-7 text-lg/8 text-gray-650">
                 ¡Nos encantaría saber de ti! Si tienes preguntas, comentarios o necesitas más información sobre nuestros productos, no dudes en ponerte en contacto con nosotros a través de cualquiera de los siguientes métodos:
               </p>
@@ -18,29 +18,29 @@ const AtencionAlCliente = () => {
               <div>
                 <h3 className="border-l border-indigo-600 pl-6 font-semibold text-gray-900">WhatsApp</h3>
                 <address className="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-                  <p>7111-1010</p>
-                  <p>ya vamos a ver que ponemos</p>
+                  <p>7136-8285</p>
+                  
                 </address>
               </div>
               <div>
                 <h3 className="border-l border-indigo-600 pl-6 font-semibold text-gray-900">Facebook</h3>
                 <address className="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-                  <p>Bazzar Fashon JJ</p>
-                  <p>ya vamos a ver que ponemos</p>
+                  <p>Bazar Fashion JJ</p>
+                 
                 </address>
               </div>
               <div>
                 <h3 className="border-l border-indigo-600 pl-6 font-semibold text-gray-900">Instagram</h3>
                 <address className="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-                  <p>bazzar_fashonJJ</p>
-                  <p>ya vamos a ver que ponemos</p>
+                  <p>Bazar Fashion JJ</p>
+                 
                 </address>
               </div>
               <div>
                 <h3 className="border-l border-indigo-600 pl-6 font-semibold text-gray-900">TikTok</h3>
                 <address className="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-                  <p>bazzar_fashonJJ</p>
-                  <p>ya vamos a ver que ponemos</p>
+                  <p>Bazar Fashion JJ</p>
+                 
                 </address>
               </div>
             </div>
