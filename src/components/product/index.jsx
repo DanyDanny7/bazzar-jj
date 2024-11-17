@@ -1,144 +1,113 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/typography'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 'use client'
 
-import { Fragment, useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
-    Dialog,
-    DialogBackdrop,
-    DialogPanel,
-    Popover,
-    PopoverButton,
-    PopoverGroup,
-    PopoverPanel,
     Radio,
     RadioGroup,
-    Tab,
-    TabGroup,
-    TabList,
-    TabPanel,
-    TabPanels,
-} from '@headlessui/react'
-import {
-    Bars3Icon,
-    CurrencyDollarIcon,
-    GlobeAmericasIcon,
-    MagnifyingGlassIcon,
-    ShoppingBagIcon,
-    UserIcon,
-    XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { StarIcon } from '@heroicons/react/20/solid'
-
-
-// const product = {
-//     name: 'Basic Tee',
-//     price: '$35',
-//     href: '#',
-//     breadcrumbs: [
-//         { id: 1, name: 'Women', href: '#' },
-//         { id: 2, name: 'Clothing', href: '#' },
-//     ],
-//     images: [
-//         {
-//             id: 1,
-//             imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-featured-product-shot.jpg',
-//             imageAlt: "Back of women's Basic Tee in black.",
-//             primary: true,
-//         },
-//         {
-//             id: 2,
-//             imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-01.jpg',
-//             imageAlt: "Side profile of women's Basic Tee in black.",
-//             primary: false,
-//         },
-//         {
-//             id: 3,
-//             imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-product-shot-02.jpg',
-//             imageAlt: "Front of women's Basic Tee in black.",
-//             primary: false,
-//         },
-//     ],
-//     colors: [
-//         { name: 'Black', bgColor: 'bg-gray-900', selectedColor: 'ring-gray-900' },
-//         { name: 'Heather Grey', bgColor: 'bg-gray-400', selectedColor: 'ring-gray-400' },
-//     ],
-//     sizes: [
-//         { name: 'XXS', inStock: true },
-//         { name: 'XS', inStock: true },
-//         { name: 'S', inStock: true },
-//         { name: 'M', inStock: true },
-//         { name: 'L', inStock: true },
-//         { name: 'XL', inStock: false },
-//     ],
-//     description: `
-//     <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
-//     <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
-//   `,
-//     details: [
-//         'Only the best materials',
-//         'Ethically and locally made',
-//         'Pre-washed and pre-shrunk',
-//         'Machine wash cold with similar colors',
-//     ],
-// }
-const policies = [
-    { name: 'International delivery', icon: GlobeAmericasIcon, description: 'Get your order in 2 years' },
-    { name: 'Loyalty rewards', icon: CurrencyDollarIcon, description: "Don't look at other tees" },
-]
+} from '@headlessui/react';
+import isEmpty from "lodash/isEmpty";
+import Notification from "./Notification";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function Example({ product }) {
-    const [open, setOpen] = useState(false)
-    const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes?.[2])
+    const [text, setText] = useState("");
+    const [selectedColor, setSelectedColor] = useState({});
+    const [selectedSize, setSelectedSize] = useState({});
 
+    useEffect(() => {
+        if (!!text) {
+            setTimeout(() => {
+                setText("")
+            }, 5000);
+        }
+    }, [text])
 
-    const handleColorChange = (color) => {
-        setSelectedColor(color);
-    };
-
-    const handleSizeChange = (size) => {
-        setSelectedSize(size);
-    };
+    const getColor = (color) => {
+        switch (color) {
+            case "black": return ({
+                "name": "Negro",
+                "bgColor": "bg-black",
+                "selectedColor": "ring-black"
+            })
+            case "white": return ({
+                "name": "Blanco",
+                "bgColor": "bg-white",
+                "selectedColor": "ring-gray-300"
+            })
+            case "gray": return ({
+                "name": "Gris",
+                "bgColor": "bg-gray-500",
+                "selectedColor": "ring-gray-500"
+            })
+            case "green": return ({
+                "name": "Verde",
+                "bgColor": "bg-green-500",
+                "selectedColor": "ring-green-500"
+            })
+            case "red": return ({
+                "name": "Rojo",
+                "bgColor": "bg-red-600",
+                "selectedColor": "ring-red-600"
+            })
+            case "blue": return ({
+                "name": "Azul",
+                "bgColor": "bg-blue-500",
+                "selectedColor": "ring-blue-500"
+            })
+            case "yellow": return ({
+                "name": "Amarillo",
+                "bgColor": "bg-yellow-300",
+                "selectedColor": "ring-yellow-300"
+            })
+            case "orange": return ({
+                "name": "Anaranjado",
+                "bgColor": "bg-orange-500",
+                "selectedColor": "ring-orange-500"
+            })
+            case "pink": return ({
+                "name": "Rosado",
+                "bgColor": "bg-pink-400",
+                "selectedColor": "ring-pink-400"
+            })
+            case "brown": return ({
+                "name": "Cafe",
+                "bgColor": "bg-yellow-950",
+                "selectedColor": "ring-yellow-950"
+            })
+            default: return ({
+                "name": "Blanco",
+                "bgColor": "bg-white-900",
+                "selectedColor": "ring-white-900"
+            })
+        }
+    }
 
     const handleWhatsAppClick = (e) => {
         e.preventDefault()
         // Validate selections before sending message
-        if (!selectedColor || !selectedSize) {
-            alert("Por favor, selecciona un color y una talla.");
+        if (isEmpty(selectedColor) || isEmpty(selectedSize)) {
+            setText("Por favor, selecciona un color y una talla.")
             return; // Prevent sending an incomplete message
+        } else {
+            const productoName = product.name;
+            const message = `Quiero pedir el producto ${productoName} en color ${getColor(selectedColor.slug).name} y talla ${selectedSize.name}.`;
+            const whatsappUrl = `http://wa.me/${process.env.NEXT_PUBLIC_WA_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
-        const productoName = product.name;
-        const message = `Quiero pedir el producto ${productoName} en color ${selectedColor.name} y talla ${selectedSize.name}.`;
-        const whatsappUrl = `http://wa.me/${process.env.NEXT_PUBLIC_WA_NUMBER}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
     };
+
+
 
     return (
         <div className="bg-white">
             <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
                 <div className="lg:col-span-5 lg:col-start-8">
                     <div className="flex justify-between">
-                        <h1 className="text-xl font-medium text-gray-900">{product.name}</h1>
-                        <p className="text-xl font-medium text-gray-900">{product.price}</p>
+                        <h1 className="text-3xl font-medium text-gray-900">{product.name}</h1>
+                        <p className="text-xl font-medium text-gray-900 whitespace-nowrap">{`$ ${product.price}`}</p>
                     </div>
 
                 </div>
@@ -148,9 +117,9 @@ export default function Example({ product }) {
                     <h2 className="sr-only">Images</h2>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
-                        {product?.images?.map((image) => (
+                        {product?.images?.map((image, i) => (
                             <img
-                                key={image.id}
+                                key={i}
                                 alt={image.imageAlt}
                                 src={image.imageSrc}
                                 className={classNames(
@@ -172,18 +141,19 @@ export default function Example({ product }) {
                                 <RadioGroup value={selectedColor} onChange={setSelectedColor} className="flex items-center space-x-3">
                                     {product?.colors?.map((color) => (
                                         <Radio
-                                            key={color.name}
+                                            key={getColor(color.slug).name}
                                             value={color}
-                                            aria-label={color.name}
+                                            aria-label={getColor(color.slug).name}
+                                            title={getColor(color.slug).name}
                                             className={classNames(
-                                                color.selectedColor,
+                                                getColor(color.slug).selectedColor,
                                                 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none data-[checked]:ring-2 data-[focus]:data-[checked]:ring data-[focus]:data-[checked]:ring-offset-1',
                                             )}
                                         >
                                             <span
                                                 aria-hidden="true"
                                                 className={classNames(
-                                                    color.bgColor,
+                                                    getColor(color.slug).bgColor,
                                                     'h-8 w-8 rounded-full border border-black border-opacity-10',
                                                 )}
                                             />
@@ -195,13 +165,6 @@ export default function Example({ product }) {
 
                         {/* Size picker */}
                         <div className="mt-8">
-                            <div className="flex items-center justify-between">
-                                <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                                <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                    See sizing chart
-                                </a>
-                            </div>
-
                             <fieldset aria-label="Choose a size" className="mt-2">
                                 <RadioGroup
                                     value={selectedSize}
@@ -224,9 +187,6 @@ export default function Example({ product }) {
                                 </RadioGroup>
                             </fieldset>
                         </div>
-
-
-
                         <button
                             onClick={handleWhatsAppClick} disabled={!selectedColor || !selectedSize}
                             className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-whatsapp duration-300 px-8 py-3 text-base font-medium text-white hover:bg-whatsapp_dark focus:outline-none focus:ring-2 focus:ring-whatsapp_dark focus:ring-offset-2"
@@ -240,13 +200,11 @@ export default function Example({ product }) {
                             </div>
                         </button>
 
-
-
                     </form>
 
                     {/* Product details */}
                     <div className="mt-10">
-                        <h2 className="text-sm font-medium text-gray-900">Description</h2>
+                        <h2 className="text-md font-medium text-gray-900">Description</h2>
 
                         <div
                             dangerouslySetInnerHTML={{ __html: product.description }}
@@ -254,38 +212,9 @@ export default function Example({ product }) {
                         />
                     </div>
 
-                    <div className="mt-8 border-t border-gray-200 pt-8">
-                        <h2 className="text-sm font-medium text-gray-900">Fabric &amp; Care</h2>
-
-                        <div className="prose prose-sm mt-4 text-gray-500">
-                            <ul role="list">
-                                {product?.details?.map((item) => (
-                                    <li key={item}>{item}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-
-                    {/* Policies */}
-                    <section aria-labelledby="policies-heading" className="mt-10">
-                        <h2 id="policies-heading" className="sr-only">
-                            Our Policies
-                        </h2>
-
-                        <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                            {policies?.map((policy) => (
-                                <div key={policy.name} className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
-                                    <dt>
-                                        <policy.icon aria-hidden="true" className="mx-auto h-6 w-6 flex-shrink-0 text-gray-400" />
-                                        <span className="mt-4 text-sm font-medium text-gray-900">{policy.name}</span>
-                                    </dt>
-                                    <dd className="mt-1 text-sm text-gray-500">{policy.description}</dd>
-                                </div>
-                            ))}
-                        </dl>
-                    </section>
                 </div>
             </div>
+            <Notification text={text} open={!!text} setClose={() => setText("")} />
         </div>
     )
 }
