@@ -5,7 +5,7 @@ import isEmpty from "lodash/isEmpty";
 import CEO from "@/components/util/CEO";
 import get from "lodash/get";
 
-export default function Categoria({ data }) {
+const Categoria = ({ data }) => {
   return (
     <Layout>
       <CEO title={get(data, "nombre", "")} description={""} image={get(data, "imagen", "")} />
@@ -37,3 +37,4 @@ export async function getServerSideProps(ctx) {
   }
   return { props: { data } }
 }
+export default Categoria;
