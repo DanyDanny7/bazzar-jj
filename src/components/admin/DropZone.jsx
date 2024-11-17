@@ -1,11 +1,19 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { get, includes, map, split, trim, capitalize, lowerCase } from 'lodash';
 import { useDropzone } from 'react-dropzone'
 import * as XLSX from 'xlsx';
 
 
-const DropZone = ({ setProducts, module, getFile, type = 1, edit }) => {
-    const [showNoti, setShowNoti] = useState({ open: false, msg: "", variant: "" })
+const DropZone = ({ setProducts, textNoti, setTextNoti }) => {
+
+    useEffect(() => {
+        if (!!textNoti) {
+            setTimeout(() => {
+                setTextNoti("")
+            }, 5000);
+        }
+    }, [textNoti])
+
 
     const onDrop = useCallback((acceptedFiles, e) => {
         try {
@@ -80,14 +88,12 @@ const DropZone = ({ setProducts, module, getFile, type = 1, edit }) => {
                     }
                 };
 
-                // getFile(newFile) // este llena el submit
-                // setFile(newFile) // este llena la vista previa.
             } else {
-                // setShowNoti({ open: true, msg: __(`${module}.modal.error.file`), variant: "error" })
+                setTextNoti("Solo se admite formato CSV")
             }
         } catch (error) {
             console.log(error)
-            // setShowNoti({ open: true, msg: __(`${module}.modal.error.file`), variant: "error" })
+            setTextNoti("Surgió un error al procesas el archivo, por favor reviselo")
         }
     }, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })

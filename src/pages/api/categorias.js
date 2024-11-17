@@ -55,15 +55,9 @@ export default async (req, res) => {
             await client.connect();
             const db = client.db("Bazzar-JJ");
             const col = db.collection("categorias");
-            const filter = { slug: body.slug };
+            const filter = { slug: params.slug };
             const updateDocument = {
-                $set: {
-                    nombre: body.nombre,
-                    imagen: body.imagen,
-                    type: body.type,
-                    active: body.active,
-                    products: []
-                },
+                $set: body,
                 $currentDate: { lastUpdated: true }
             };
 

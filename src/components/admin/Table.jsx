@@ -3,8 +3,9 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import Empty from "@/components/util/Empty";
 import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
 
-const Table = ({ onEdit, onDelete, showProducts, categories, onAdd, addNewProducts }) => {
+const Table = ({ loading, onEdit, onDelete, showProducts, categories, onAdd, addNewProducts }) => {
     return (
         <div className="mt-8 flow-root">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -26,22 +27,25 @@ const Table = ({ onEdit, onDelete, showProducts, categories, onAdd, addNewProduc
                             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                 Activo
                             </th>
+                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                Productos
+                            </th>
                             <th scope="col" className="relative py-3.5">
                                 <span className="sr-only">Opciones</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody className="bg-white">
-
                         {categories.map((category) => (
                             <tr key={category._id} className="even:bg-gray-50">
                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                                    <img src={category.imagen} className="h-10 w-10 rounded-full" />
+                                    <img src={category.imagen} className="h-10 w-10 rounded-full object-cover" />
                                 </td>
-                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.slug}</td>
-                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.nombre}</td>
-                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.type}</td>
-                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{category.active === "true" ? "Si" : "No"}</td>
+                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{get(category, "slug", "")}</td>
+                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{get(category, "nombre", "")}</td>
+                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{get(category, "type", "")}</td>
+                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{get(category, "active", "false") === "true" ? "Si" : "No"}</td>
+                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{get(category, "products.length", "")}</td>
                                 <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium flex gap-4">
                                     <Menu as="div" className="relative inline-block text-left">
                                         <div>
@@ -74,15 +78,17 @@ const Table = ({ onEdit, onDelete, showProducts, categories, onAdd, addNewProduc
                                                         Añadir productos<span className="sr-only">, {category.name}</span>
                                                     </button>
                                                 </MenuItem>
-                                                <MenuItem>
-                                                    <button
-                                                        onClick={showProducts(category)}
-                                                        type="button"
-                                                        className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
-                                                    >
-                                                        Ver productos<span className="sr-only">, {category.name}</span>
-                                                    </button>
-                                                </MenuItem>
+                                                {!!get(category, "products.length", 0) &&
+                                                    <MenuItem>
+                                                        <button
+                                                            onClick={showProducts(category)}
+                                                            type="button"
+                                                            className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
+                                                        >
+                                                            Ver productos<span className="sr-only">, {category.name}</span>
+                                                        </button>
+                                                    </MenuItem>
+                                                }
                                                 <MenuItem>
                                                     <button
                                                         onClick={onDelete(category)}
@@ -106,6 +112,7 @@ const Table = ({ onEdit, onDelete, showProducts, categories, onAdd, addNewProduc
                         description="Debes agregar categoría para poder visualizarlos"
                         onClick={onAdd}
                         btnName="Agregar producto"
+                        loading={loading}
                     />
                 }
             </div>

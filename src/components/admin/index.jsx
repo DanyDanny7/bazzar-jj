@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toString from "lodash/toString";
 import isEmpty from "lodash/isEmpty";
-import Form from "./Form";
+import AddCategory from "./AddCategory";
 import Products from "./Products";
 import AddProducts from "./AddProducts";
 import Modal from "./Modal";
 import Confirm from "./Confirm";
 import Table from "./Table";
 import Button from "@/components/util/Button";
+import Notification from "./Notification"
 
-const Tabla = () => {
+const Admin = () => {
     const [categories, setCategories] = useState([]);
     const [toEdit, setToEdit] = useState({});
     const [toDelete, setToDelete] = useState({});
@@ -18,23 +19,38 @@ const Tabla = () => {
     const [products, setProducts] = useState(false);
     const [addProducts, setAddProducts] = useState(false);
     const [confirm, setConfirm] = useState(false);
+    const [getLoad, setGetLoad] = useState(true);
     const [postLoad, setPostLoad] = useState(false);
     const [putLoad, setPutLoad] = useState(false);
     const [deleteLoad, setDeleteLoad] = useState(false);
+    const [textNoti, setTextNoti] = useState();
 
     const getCategories = async () => {
+        setGetLoad(true);
         try {
             const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`)
             setCategories(data)
         } catch (error) {
             console.log({ error })
+        } finally {
+            setGetLoad(false);
         }
+    }
+
+    const onCancel = () => {
+        setOpen(false)
+        setProducts(false)
+        setAddProducts(false)
+        setConfirm(false)
+        setTimeout(() => {
+            setToDelete({})
+            setToEdit({})
+        }, 1000);
     }
 
     const reload = () => {
         getCategories();
-        setOpen(false)
-        setPostLoad(false);
+        onCancel()
     }
 
     const postCategory = async (values) => {
@@ -46,11 +62,13 @@ const Tabla = () => {
                 imagen: values.imagen,
                 type: values.type,
                 active: toString(values.active),
+                products: []
             }
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
             reload()
         } catch (error) {
             console.log({ error })
+        } finally {
             setPostLoad(false);
         }
     }
@@ -58,17 +76,16 @@ const Tabla = () => {
         setPutLoad(true);
         try {
             const body = {
-                _id: values._id,
-                slug: values.slug,
                 nombre: values.nombre,
                 imagen: values.imagen,
                 type: values.type,
                 active: toString(values.active),
             }
-            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
+            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias?slug=${values.slug}`, body)
             reload()
         } catch (error) {
             console.log({ error })
+        } finally {
             setPutLoad(false);
         }
     }
@@ -80,6 +97,7 @@ const Tabla = () => {
             reload()
         } catch (error) {
             console.log({ error })
+        } finally {
             setDeleteLoad(false);
         }
     }
@@ -129,51 +147,44 @@ const Tabla = () => {
         setConfirm(true)
     }
 
-    const onCancel = () => {
-        setToDelete({})
-        setToEdit({})
-        setOpen(false)
-        setAddProducts(false)
-        setProducts(false)
-        setConfirm(false)
-    }
-
     return (
-        <div className="px-4 sm:px-2 lg:px-0 py-4">
+        <div>
+            <div className="px-4 sm:px-2 lg:px-0 py-4">
+                <Modal setOpen={onCancel} open={open} title={!isEmpty(toEdit) ? "Editar categoría" : "Crear categoría"}>
+                    <AddCategory
+                        onSubmit={onSubmit}
+                        toEdit={toEdit}
+                        className={open ? "overflow-auto" : `h-0 overflow-hidden`}
+                        setOpen={setOpen}
+                        setToEdit={setToEdit}
+                        loading={postLoad || putLoad}
+                    />
+                </Modal>
+                <Modal setOpen={onCancel} open={products} edit={!isEmpty(toEdit)}>
+                    <Products toEdit={toEdit} onCancel={onCancel} reload={getCategories} />
+                </Modal>
+                <Modal setOpen={onCancel} open={addProducts} edit={!isEmpty(toEdit)}>
+                    <AddProducts toEdit={toEdit} onCancel={onCancel} reload={reload} setTextNoti={setTextNoti} textNoti={textNoti} />
+                </Modal>
 
-            <Modal setOpen={onCancel} open={open} title={!isEmpty(toEdit) ? "Editar categoría" : "Crear categoría"}>
-                <Form
-                    onSubmit={onSubmit}
-                    toEdit={toEdit}
-                    className={open ? "overflow-auto" : `h-0 overflow-hidden`}
-                    setOpen={setOpen}
-                    setToEdit={setToEdit}
-                    loading={postLoad || putLoad}
-                />
-            </Modal>
-            <Modal setOpen={onCancel} open={products} edit={!isEmpty(toEdit)}>
-                <Products toEdit={toEdit} onCancel={onCancel} />
-            </Modal>
-            <Modal setOpen={onCancel} open={addProducts} edit={!isEmpty(toEdit)}>
-                <AddProducts toEdit={toEdit} onCancel={onCancel} />
-            </Modal>
-
-            <div className="sm:flex sm:items-center">
-                <div className="sm:flex-auto">
-                    <h1 className="text-base font-semibold text-gray-900">Administrar Categorías</h1>
-                    <p className="mt-2 text-sm text-gray-700">
-                    </p>
+                <div className="sm:flex sm:items-center">
+                    <div className="sm:flex-auto">
+                        <h1 className="text-base font-semibold text-gray-900">Administrar Categorías</h1>
+                        <p className="mt-2 text-sm text-gray-700">
+                        </p>
+                    </div>
+                    <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                        <Button onClick={onAdd} type="button" variant="contained">
+                            Agregar Categoría
+                        </Button>
+                    </div>
                 </div>
-                <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <Button onClick={onAdd} type="button" variant="contained">
-                        Agregar Categoría
-                    </Button>
-                </div>
+                <Table loading={getLoad} onEdit={onEdit} onDelete={onDelete} showProducts={showProducts} categories={categories} onAdd={onAdd} addNewProducts={addNewProducts} />
+                <Confirm toDelete={toDelete} open={confirm} onConfirm={confirmDelete} onCancel={onCancel} loading={deleteLoad} />
             </div>
-            <Table onEdit={onEdit} onDelete={onDelete} showProducts={showProducts} categories={categories} onAdd={onAdd} addNewProducts={addNewProducts} />
-            <Confirm toDelete={toDelete} open={confirm} onConfirm={confirmDelete} onCancel={onCancel} loading={deleteLoad} />
+            <Notification text={textNoti} open={!!textNoti} setClose={() => setTextNoti("")} />
         </div>
     )
 }
 
-export default Tabla;
+export default Admin;
