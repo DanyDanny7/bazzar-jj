@@ -65,25 +65,40 @@ export default async (req, res) => {
             if (body.length > 0) {
                 // Agrega el detalle de los productos añadidos a la categoría
                 const categories = db.collection("categorias");
-                const filter = { slug: body[0].category };
+                const filterCategory = { slug: body[0].category };
+
+                const category = await db.collection("categorias")
+                    .find(filterCategory)
+                    .sort({ metacritic: -1 })
+                    .limit(100)
+                    .toArray();
+
+                const oldProducts = category[0].products;
+                const newProducts = body.map((product) => ({
+                    slug: product.slug,
+                    name: product.name,
+                    code: product.code,
+                    price: product.price,
+                    imageSrc: product.images.find(({ primary }) => primary).imageSrc,
+                    imageAlt: product.images.find(({ primary }) => primary).imageAlt,
+                    description: product.description,
+                }))
+
+                console.log(category)
+                console.log({ newProducts })
+
                 const updateCategory = {
                     $set: {
-                        products: body.map((product) => ({
-                            slug: product.slug,
-                            name: product.name,
-                            imageSrc: product.images.find(({ primary }) => primary).imageSrc,
-                            imageAlt: product.images.find(({ primary }) => primary).imageAlt,
-                            description: product.description,
-                        })),
+                        products: [...oldProducts, ...newProducts],
                     },
                     $currentDate: { lastUpdated: true }
                 };
 
-                console.log(filter)
-                console.log(updateCategory)
 
-                const respCat = await categories.updateOne(filter, updateCategory);
-                console.log({respCat})
+
+
+                const respCat = await categories.updateOne(filterCategory, updateCategory);
+                console.log({ respCat })
             }
 
             return res.status(200).json(respProducts)
@@ -116,24 +131,6 @@ export default async (req, res) => {
             };
 
             const resp = await col.updateOne(filter, updateDocument);
-
-            return res.status(200).json(resp)
-        } catch (err) {
-            return res.status(400).json(err.stack)
-        }
-
-        finally {
-            await client.close();
-        }
-    }
-    else if (req.method === 'DELETE') {
-
-        try {
-            const { slug } = params;
-            await client.connect();
-            const db = client.db("Bazzar-JJ");
-            const col = db.collection("productos");
-            const resp = await col.deleteOne({ slug });
 
             return res.status(200).json(resp)
         } catch (err) {
