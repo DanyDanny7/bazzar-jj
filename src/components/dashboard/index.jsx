@@ -15,7 +15,7 @@ const Dashboard = ({ data }) => (
         <div aria-hidden="true" className="relative">
             <img
                 alt=""
-                src="https://i.pinimg.com/736x/63/03/84/6303846a344c887ec462d3dee0c828fb.jpg"
+                src="https://tailwindui.com/plus/img/ecommerce-images/product-feature-02-full-width.jpg"
                 className="h-96 w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white" />
@@ -23,10 +23,11 @@ const Dashboard = ({ data }) => (
 
         <div className="relative mx-auto -mt-12 max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
             <div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Technical Specifications</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Bazar Fashion JJ</h2>
                 <p className="mt-4 text-gray-500">
-                    Organize is a system to keep your desk tidy and photo-worthy all day long. Procrastinate your work while you
-                    meticulously arrange items into dedicated trays.
+                    ¡Bienvenido a Bazar Fashion JJ! Descubre una amplia selección de ropa y zapatos para cualquier ocasión.
+                     Desde las últimas tendencias hasta los clásicos atemporales, encontrarás todo lo que necesitas para expresar
+                      tu estilo.<br/> <strong>¡Compra ahora y disfruta de envío gratis en pedidos superiores a $50.00!</strong>
                 </p>
             </div>
             <ShopByCategory categories={data} />
