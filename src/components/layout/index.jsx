@@ -7,17 +7,21 @@ import axios from "axios";
 import find from "lodash/find";
 import get from "lodash/get";
 import dynamic from 'next/dynamic';
+import Button from "@/components/util/Button";
+import { signOut, useSession } from "next-auth/react";
 
 const Footer = dynamic(() => import('./Footer'), { ssr: false });
 const Drawer = dynamic(() => import('./Drawer'), { ssr: false });
 
 export default function Layout({ children }) {
+  const { data: session, status } = useSession();
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const { category } = router.query;
 
   const [active, setActive] = useState("")
   const [menu, setMenu] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setOpen(false)
@@ -32,7 +36,15 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     getCategories()
-  }, [])
+  }, []);
+
+  const onSingOut = async () => {
+    setLoading(true)
+    await signOut()
+    setLoading(false)
+  }
+
+  const isLogged = status === "authenticated";
 
   return (
     <>
@@ -66,7 +78,9 @@ export default function Layout({ children }) {
                 </div>
               </div>
 
+
               <div className="-mr-2 flex items-center ">
+                {isLogged && <Button loading={loading} className="ml-auto" variant="transparent" onClick={onSingOut} >Cerrar Sesión</Button>}
                 <DisclosureButton
                   className="group relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   onClick={() => setOpen(true)}

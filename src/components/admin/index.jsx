@@ -10,8 +10,11 @@ import Confirm from "./Confirm";
 import Table from "./Table";
 import Button from "@/components/util/Button";
 import Notification from "./Notification"
+import { useSession } from "next-auth/react";
 
 const Admin = () => {
+    const { status } = useSession();
+
     const [categories, setCategories] = useState([]);
     const [toEdit, setToEdit] = useState({});
     const [toDelete, setToDelete] = useState({});
@@ -112,8 +115,8 @@ const Admin = () => {
     }
 
     useEffect(() => {
-        reload()
-    }, [])
+        if (status === "authenticated") reload()
+    }, [status])
 
 
     const onAdd = () => setOpen(state => !state)

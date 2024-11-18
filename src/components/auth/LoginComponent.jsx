@@ -1,18 +1,34 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import Button from "@/components/util/Button";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import Notification from "./Notification"
 
 const LoginComponent = () => {
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const body = {
             email: e.target["email"].value,
-            password: e.target["password"].value
+            password: e.target["password"].value,
+            redirect: false
         }
-        const resp = await signIn('credentials', body)
-        console.log(resp)
+        await signIn('credentials', body)
+            .then(({ ok, error }) => {
+                if (ok) {
+                    setError("");
+                    router.push("/admin")
+                } else {
+                    setError(error);
+                }
+            })
+            .catch((e) => console.log(e))
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -46,10 +62,11 @@ const LoginComponent = () => {
                         />
                     </div>
                 </div>
-                <Button type="submit" variant='contained' className="mt-6">
+                <Button loading={loading} type="submit" variant='contained' className="mt-6">
                     Iniciar Sesión
                 </Button>
             </form>
+            <Notification text={error} open={!!error} setClose={() => setError("")} />
         </div>
     )
 }

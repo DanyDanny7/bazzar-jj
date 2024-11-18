@@ -24,6 +24,7 @@ export const authOptions = NextAuth({
                 const passwordMatch = credencials.password === userFound.password;
                 if (!passwordMatch) throw new Error("Credenciales inválidas");
 
+                await client.close();
                 delete userFound.password;
                 return userFound;
             }
@@ -32,9 +33,7 @@ export const authOptions = NextAuth({
     ],
     callbacks: {
         async jwt({ account, token, user, profile, session }) {
-
             if (user) token.user = user;
-            console.log(token)
             return token;
         },
         session({ session, token, user }) {
