@@ -1,15 +1,16 @@
-import mongoClient, { uri } from "../../lib/mongodb";
+import { uri } from "@/lib/mongodb";
 import { MongoClient } from "mongodb";
 
 export default async (req, res) => {
     const client = new MongoClient(uri);
     const params = req.query;
+    const BD = process.env.NEXT_PUBLIC_MONTODB_DB;
 
     if (req.method === 'PUT') {
         try {
             const body = req.body;
             await client.connect();
-            const db = client.db("Bazzar-JJ");
+            const db = client.db(BD);
             const col = db.collection("categorias");
             const filterCategory = { slug: params.slug };
             const filterProduct = { slug: body.deleted.slug };

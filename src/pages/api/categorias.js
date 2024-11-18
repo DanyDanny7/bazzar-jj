@@ -1,14 +1,15 @@
-import mongoClient, { uri } from "../../lib/mongodb";
-const { MongoClient } = require("mongodb");
+import  { uri } from "@/lib/mongodb";
+import { MongoClient } from "mongodb";
 
 export default async (req, res) => {
     const client = new MongoClient(uri);
     const params = req.query;
+    const BD = process.env.NEXT_PUBLIC_MONTODB_DB;
 
     if (req.method === 'GET') {
 
         try {
-            const db = mongoClient.db("Bazzar-JJ");
+            const db = client.db(BD);
             const categorieas = await db
                 .collection("categorias")
                 .find(params)
@@ -23,6 +24,8 @@ export default async (req, res) => {
             }
         } catch (e) {
             return res.status(400).json({})
+        } finally {
+            await client.close();
         }
     }
 
@@ -33,7 +36,7 @@ export default async (req, res) => {
             // Connect to the Atlas cluster
             await client.connect();
             // Get the database and collection on which to run the operation
-            const db = client.db("Bazzar-JJ");
+            const db = client.db(BD);
             const col = db.collection("categorias");
             // Create new documents                                                                                                                                         
             const p = await col.insertOne(body);
@@ -53,7 +56,7 @@ export default async (req, res) => {
         try {
             const body = req.body;
             await client.connect();
-            const db = client.db("Bazzar-JJ");
+            const db = client.db(BD);
             const col = db.collection("categorias");
             const filter = { slug: params.slug };
             const updateDocument = {
@@ -77,7 +80,7 @@ export default async (req, res) => {
         try {
             const { slug } = params;
             await client.connect();
-            const db = client.db("Bazzar-JJ");
+            const db = client.db(BD);
             const col = db.collection("categorias");
             const respCat = await col.deleteOne({ slug });
 
