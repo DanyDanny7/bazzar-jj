@@ -1,13 +1,19 @@
 import React from 'react';
 import Layout from "@/components/layout";
-import axios from "axios";
+import { useSession } from "next-auth/react";
 
 import AdminComponent from "@/components/admin"
 
-const Admin = () => (
-    <Layout>
-        <AdminComponent />
-    </Layout>
-)
+const Admin = () => {
+    const { data: session, status } = useSession();
+
+    console.log(session, status)
+
+    return (
+        <Layout>
+            <AdminComponent />
+        </Layout>
+    )
+}
 
 export default Admin
