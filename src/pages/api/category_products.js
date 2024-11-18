@@ -32,9 +32,7 @@ export default async (req, res) => {
             return res.status(200).json({ respCat, respProd })
         } catch (err) {
             return res.status(400).json(err.stack)
-        }
-
-        finally {
+        } finally {
             await client.close();
         }
     }

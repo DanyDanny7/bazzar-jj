@@ -10,6 +10,7 @@ export default async (req, res) => {
     if (req.method === 'GET') {
 
         try {
+            await client.connect();
             const db = client.db(BD);
             const categorieas = await db
                 .collection("productos")
@@ -61,9 +62,6 @@ export default async (req, res) => {
                     description: product.description,
                 }))
 
-                console.log(category)
-                console.log({ newProducts })
-
                 const updateCategory = {
                     $set: {
                         products: [...oldProducts, ...newProducts],
@@ -71,19 +69,13 @@ export default async (req, res) => {
                     $currentDate: { lastUpdated: true }
                 };
 
-
-
-
-                const respCat = await categories.updateOne(filterCategory, updateCategory);
-                console.log({ respCat })
+                await categories.updateOne(filterCategory, updateCategory);
             }
 
             return res.status(200).json(respProducts)
         } catch (err) {
             return res.status(400).json(err.stack)
-        }
-
-        finally {
+        } finally {
             await client.close();
         }
 
@@ -112,9 +104,7 @@ export default async (req, res) => {
             return res.status(200).json(resp)
         } catch (err) {
             return res.status(400).json(err.stack)
-        }
-
-        finally {
+        } finally {
             await client.close();
         }
     }

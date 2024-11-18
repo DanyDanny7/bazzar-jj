@@ -1,4 +1,4 @@
-import  { uri } from "@/lib/mongodb";
+import { uri } from "@/lib/mongodb";
 import { MongoClient } from "mongodb";
 
 export default async (req, res) => {
@@ -9,6 +9,7 @@ export default async (req, res) => {
     if (req.method === 'GET') {
 
         try {
+            await client.connect();
             const db = client.db(BD);
             const categorieas = await db
                 .collection("categorias")
@@ -33,12 +34,9 @@ export default async (req, res) => {
 
         try {
             const body = req.body
-            // Connect to the Atlas cluster
             await client.connect();
-            // Get the database and collection on which to run the operation
             const db = client.db(BD);
             const col = db.collection("categorias");
-            // Create new documents                                                                                                                                         
             const p = await col.insertOne(body);
 
             return res.status(200).json(p)
@@ -69,9 +67,7 @@ export default async (req, res) => {
             return res.status(200).json(resp)
         } catch (err) {
             return res.status(400).json(err.stack)
-        }
-
-        finally {
+        } finally {
             await client.close();
         }
     }
@@ -88,13 +84,10 @@ export default async (req, res) => {
             const products = db.collection("productos");
             const respProd = await products.deleteMany({ category: slug });
 
-
             return res.status(200).json({ respCat, respProd })
         } catch (err) {
             return res.status(400).json(err.stack)
-        }
-
-        finally {
+        } finally {
             await client.close();
         }
     }
