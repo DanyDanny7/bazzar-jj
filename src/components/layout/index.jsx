@@ -40,8 +40,11 @@ export default function Layout({ children }) {
 
   const onSingOut = async () => {
     setLoading(true)
-    await signOut()
+    //
+    await signOut({redirect:false})
     setLoading(false)
+    //
+    router.push("/login")
   }
 
   const isLogged = status === "authenticated";

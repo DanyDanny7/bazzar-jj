@@ -3,40 +3,7 @@ import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from
 import Head from './Head'
 
 const features = [
-    // {
-    //     name: 'Política de Atención al Cliente ',
-    //     description:
-    //         `
-    //   <li>Compromiso a proporcionar un servicio al cliente excepcional, respondiendo a consultas y quejas en un plazo de 24 horas. </li>
-    //   <li>Establecer un canal de comunicación accesible para los clientes, por medio de chat de nuestras redes sociales o de nuestro WhatsApp directamente.</li>
 
-    //   `,
-    //     icon: CheckIcon,
-    // },
-    // {
-    //     name: 'Política de Calidad ',
-    //     description:
-    //         `
-    //   <li>Garantizar que todos los productos cumplan con estándares de calidad predefinidos en Bazzar Fashon JJ.</li>
-    //   <li>Se realizan procesos de revisión y control de calidad antes del envío de productos.</li>
-    //   `,
-    //     icon: CheckIcon,
-    // },
-    // {
-    //     name: 'Política de Privacidad y Protección de Datos ',
-    //     description:
-    //         `
-    //   <li>Compromiso a proteger la información personal y confidencial de nuestros clientes.</li>
-    //   `,
-    //     icon: CheckIcon,
-    // },
-    // {
-    // //     name: 'Politica de ',
-    // //     description:
-    // //         `
-    // //   `,
-    // //     icon: CheckIcon,
-    // },
 ]
 
 export default function PoliticasGenerales() {
