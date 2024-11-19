@@ -4,25 +4,18 @@ import { MongoClient } from "mongodb";
 export default async (req, res) => {
     const client = new MongoClient(uri);
     const params = req.query;
+
     const BD = process.env.NEXT_PUBLIC_MONTODB_DB;
+    await client.connect();
+    const db = client.db(BD);
 
     if (req.method === 'GET') {
-
         try {
-            await client.connect();
-            const db = client.db(BD);
-            const categorieas = await db
+            const categories = await db
                 .collection("categorias")
                 .find(params)
-                .sort({ metacritic: -1 })
-                .limit(100)
                 .toArray();
-
-            if (!!params.slug) {
-                return res.status(200).json(categorieas[0])
-            } else {
-                return res.status(200).json(categorieas)
-            }
+            return res.status(200).json(categories)
         } catch (e) {
             return res.status(400).json({})
         } finally {
@@ -31,39 +24,29 @@ export default async (req, res) => {
     }
 
     else if (req.method === 'POST') {
-
         try {
             const body = req.body
-            await client.connect();
-            const db = client.db(BD);
-            const col = db.collection("categorias");
-            const p = await col.insertOne(body);
-
-            return res.status(200).json(p)
+            const categories = db.collection("categorias");
+            const respCategries = await categories.insertOne(body);
+            return res.status(200).json(respCategries)
         } catch (err) {
             return res.status(400).json(err.stack)
-        }
-
-        finally {
+        } finally {
             await client.close();
         }
 
     }
-    else if (req.method === 'PUT') {
 
+    else if (req.method === 'PUT') {
         try {
             const body = req.body;
-            await client.connect();
-            const db = client.db(BD);
-            const col = db.collection("categorias");
+            const categories = db.collection("categorias");
             const filter = { slug: params.slug };
             const updateDocument = {
                 $set: body,
                 $currentDate: { lastUpdated: true }
             };
-
-            const resp = await col.updateOne(filter, updateDocument);
-
+            const resp = await categories.updateOne(filter, updateDocument);
             return res.status(200).json(resp)
         } catch (err) {
             return res.status(400).json(err.stack)
@@ -71,15 +54,12 @@ export default async (req, res) => {
             await client.close();
         }
     }
-    else if (req.method === 'DELETE') {
 
+    else if (req.method === 'DELETE') {
         try {
             const { slug } = params;
-            await client.connect();
-            const db = client.db(BD);
-            const col = db.collection("categorias");
-            const respCat = await col.deleteOne({ slug });
-
+            const categories = db.collection("categorias");
+            const respCat = await categories.deleteOne({ slug });
             // elimina masivamente los productos asocialdos a la categoría
             const products = db.collection("productos");
             const respProd = await products.deleteMany({ category: slug });
@@ -93,6 +73,7 @@ export default async (req, res) => {
     }
 
     else {
+        await client.close();
         res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
         res.status(405).end(`Method ${req.method} Not Allowed`);
     }

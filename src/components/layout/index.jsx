@@ -29,7 +29,7 @@ export default function Layout({ children }) {
   }, [category])
 
   const getCategories = async () => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`)
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`, { params: { active: "true" } })
       .then(({ data }) => setMenu(data))
       .catch((err) => { console.log(err) })
   }

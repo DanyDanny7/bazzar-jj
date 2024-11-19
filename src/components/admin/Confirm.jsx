@@ -40,7 +40,7 @@ const Confirm = ({ open, toDelete, onConfirm, onCancel, loading }) => {
                                 loading={loading}
                                 variant="contained"
                             >
-                                Eliminar categoría <strong className='pl-2'>{get(toDelete, "nombre", "")}</strong>
+                                Eliminar categoría
                             </Button>
                             <Button
                                 type="button"

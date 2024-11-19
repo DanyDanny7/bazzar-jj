@@ -17,9 +17,7 @@ export async function getServerSideProps(ctx) {
   const slug = ctx.query.product;
   let data = {}
   try {
-    const res = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/productos`, {
-      params: { slug }
-    })
+    const res = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${slug}`)
     data = res.data
   } catch (error) {
   }
