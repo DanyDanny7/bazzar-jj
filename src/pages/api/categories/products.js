@@ -20,8 +20,6 @@ export default async (req, res) => {
                 $currentDate: { lastUpdated: true }
             };
 
-            console.log(filterCategory, filterProduct, updateDocument)
-
             const respCat = await col.updateOne(filterCategory, updateDocument);
 
             // elimina el producto excluido
@@ -36,7 +34,6 @@ export default async (req, res) => {
             await client.close();
         }
     }
-
 
     else {
         res.setHeader('Allow', ['PUT']);

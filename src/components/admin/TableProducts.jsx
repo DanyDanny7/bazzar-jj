@@ -24,7 +24,7 @@ const TableProducts = ({ products, toEdit, reload, show = false }) => {
                 products: restanes,
                 deleted: product
             }
-            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/category_products?slug=${toEdit.slug}`, body)
+            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categories/products?slug=${toEdit.slug}`, body)
             setList(restanes)
             reload()
         } catch (error) {

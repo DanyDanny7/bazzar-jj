@@ -31,7 +31,7 @@ const Admin = () => {
     const getCategories = async () => {
         setGetLoad(true);
         try {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`)
             setCategories(data)
         } catch (error) {
             console.log({ error })
@@ -67,7 +67,7 @@ const Admin = () => {
                 active: toString(values.active),
                 products: []
             }
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, body)
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`, body)
             reload()
         } catch (error) {
             console.log({ error })
@@ -84,7 +84,7 @@ const Admin = () => {
                 type: values.type,
                 active: toString(values.active),
             }
-            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias?slug=${values.slug}`, body)
+            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/categories?slug=${values.slug}`, body)
             reload()
         } catch (error) {
             console.log({ error })
@@ -96,7 +96,7 @@ const Admin = () => {
         setDeleteLoad(true);
         try {
             const params = { slug: values.slug }
-            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/categorias`, { params })
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`, { params })
             reload()
         } catch (error) {
             console.log({ error })

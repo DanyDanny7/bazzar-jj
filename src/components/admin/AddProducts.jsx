@@ -6,7 +6,6 @@ import map from "lodash/map";
 import get from "lodash/get";
 import Button from "@/components/util/Button";
 import axios from "axios";
-import Link from "next/link";
 
 const AddProducts = ({ toEdit, onCancel, reload, textNoti, setTextNoti }) => {
     const [products, setProducts] = useState([]);
@@ -17,19 +16,19 @@ const AddProducts = ({ toEdit, onCancel, reload, textNoti, setTextNoti }) => {
         setPostLoad(true);
         try {
             const body = map(products, (product) => ({
-                code: get(product, "code"),
-                colors: get(product, "colors"),
-                description: get(product, "description"),
-                images: get(product, "images"),
-                name: get(product, "name"),
-                price: get(product, "price"),
-                sizes: get(product, "sizes"),
-                slug: get(product, "slug"),
-                active: "true",
-                category: get(toEdit, "slug")
+                code: get(product, "code", ""),
+                colors: get(product, "colors", ""),
+                description: get(product, "description", ""),
+                images: get(product, "images", ""),
+                name: get(product, "name", ""),
+                price: get(product, "price", ""),
+                sizes: get(product, "sizes", ""),
+                slug: get(product, "slug", ""),
+                active: get(product, "active", "true"),
+                category: get(toEdit, "slug", "")
             }))
 
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/productos`, body);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, body);
             reload()
         } catch (error) {
             console.log({ error })
@@ -37,7 +36,6 @@ const AddProducts = ({ toEdit, onCancel, reload, textNoti, setTextNoti }) => {
             setPostLoad(false);
         }
     }
-
 
     return (
         <div className=''>
