@@ -1,11 +1,16 @@
 import React from 'react'
 import Layout from "@/components/layout";
 import Head from '@/components/layout/components/Head';
-
+import CEO from "@/components/util/CEO";
 
 const AtencionAlCliente = () => {
   return (
     <Layout>
+      <CEO
+        title="Atención al cliente"
+        description={""}
+        image={`${process.env.NEXT_PUBLIC_API_URL}/cover.jpeg`}
+      />
       <div>
         <div className="bg-white py-12 sm:py-7">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">

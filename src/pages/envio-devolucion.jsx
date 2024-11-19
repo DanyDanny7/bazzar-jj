@@ -2,10 +2,16 @@ import React from 'react'
 import Layout from "@/components/layout";
 import Head from '@/components/layout/components/Head';
 import List from '@/components/layout/components/List';
+import CEO from "@/components/util/CEO";
 
 const EnvioDevolucion = () => {
   return (
     <Layout>
+      <CEO
+        title="Envíos y devoluciones"
+        description={""}
+        image={`${process.env.NEXT_PUBLIC_API_URL}/cover.jpeg`}
+      />
       <div className="bg-white py-24 sm:py-7">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
