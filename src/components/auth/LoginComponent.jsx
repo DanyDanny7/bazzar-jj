@@ -32,8 +32,21 @@ const LoginComponent = () => {
     }
 
     return (
-        <div className='flex justify-center '>
-            <form className='border shadow py-6 px-10' onSubmit={onSubmit}>
+        <div className='flex justify-center drop-shadow-2xl'>
+            <form className='flex flex-col box shadow drop-shadow-2xl py-8 px-10' onSubmit={onSubmit}>
+
+                <strong
+                    className="
+                    text-sky-950
+                    md:text-center
+                    text-decoration-color: #000;
+                    capitalize
+                    text-2xl
+                    m-auto
+                    mb-5
+
+                    "
+                >Login Administrator</strong>
                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-2">
                     <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5">
                         Correo
@@ -62,7 +75,7 @@ const LoginComponent = () => {
                         />
                     </div>
                 </div>
-                <Button loading={loading} type="submit" variant='contained' className="mt-6">
+                <Button loading={loading} type="submit" variant='contained' className="mt-6 ">
                     Iniciar Sesión
                 </Button>
             </form>
