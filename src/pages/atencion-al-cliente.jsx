@@ -8,7 +8,7 @@ const AtencionAlCliente = () => {
     <Layout>
       <CEO
         title="Atención al cliente"
-        description={""}
+        description={"¡Nos encantaría saber de ti, contactanos!"}
         image={`${process.env.NEXT_PUBLIC_API_URL}/cover.jpeg`}
       />
       <div>
