@@ -23,15 +23,15 @@ export async function getServerSideProps(ctx) {
     })
     data = res.data
 
-    // if (isEmpty(data)) {
-    //   return {
-    //     redirect: {
-    //       permanent: false,
-    //       destination: `/404?from=${ctx.resolvedUrl}`,
-    //     },
-    //     props: {},
-    //   };
-    // }
+    if (isEmpty(data)) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: `/404?from=${ctx.resolvedUrl}`,
+        },
+        props: {},
+      };
+    }
   } catch (error) {
 
   }
