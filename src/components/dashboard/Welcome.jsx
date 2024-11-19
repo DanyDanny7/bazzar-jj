@@ -27,7 +27,7 @@ export default function Welcome({ product, category }) {
             />
 
             <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-2">
                     <DialogPanel
                         transition
                         className="relative transform overflow-hidden rounded-lg bg-white px-1 md:px-4 pb-1 md:pb-4 pt-2 md:pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-4xl sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
@@ -51,7 +51,7 @@ export default function Welcome({ product, category }) {
                                                 >
                                                     <div className={"mt-2 md:mt-6 lg:col-span-5 lg:row-start-1 lg:mt-0 xl:col-span-6"}>
                                                         <h3 className="text-lg font-medium text-gray-900">{feature.name}</h3>
-                                                        <p className="mt-0 md:mt-2 text-sm text-gray-500 leading-[1.2]" dangerouslySetInnerHTML={{ __html: feature.description }} />
+                                                        <p className="mt-1 md:mt-2 text-sm text-gray-500 leading-[1.2]" dangerouslySetInnerHTML={{ __html: feature.description }} />
                                                     </div>
                                                     <div
                                                         className={"flex-auto lg:col-span-7 lg:row-start-1 xl:col-span-6 px-4"}

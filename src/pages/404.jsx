@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import CEO from "@/components/util/CEO";
 
 export default function Page404() {
     const router = useRouter();
@@ -9,6 +10,11 @@ export default function Page404() {
     return (
 
         <div className="min-h-full">
+            <CEO
+                title="404 No Found"
+                description={""}
+                image={`${process.env.NEXT_PUBLIC_API_URL}/cover.jpeg`}
+            />
             <Layout>
                 <main className="grid place-items-center bg-white px-6 py-10 sm:py-10 lg:px-8">
                     <div className="text-center">
