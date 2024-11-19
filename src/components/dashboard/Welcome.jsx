@@ -23,7 +23,6 @@ export default function Welcome({ product, category }) {
         },
     ]
 
-
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-10">
             <DialogBackdrop
