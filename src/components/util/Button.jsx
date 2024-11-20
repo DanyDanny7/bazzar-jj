@@ -1,13 +1,16 @@
 import React from 'react'
 
+// Componente React para un botón personalizable
 const Button = ({ children, loading, className, type = "button", onClick = () => { }, variant = "default" }) => {
 
+// Definición de las clases CSS para las distintas variantes del botón
     const variants = {
         default: 'flex justify-center items-center w-full border border-gray-200 px-3 py-2 rounded-md text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:bg-gray-300 duration-300',
         contained: 'flex justify-center items-center w-full rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 duration-300',
         transparent: 'flex justify-center items-center w-full px-3 py-2 rounded-md text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:bg-gray-300 duration-300',
     };
 
+     // Renderizado del botón
     return (
         <button type={type} className={`${className} ${variants[variant]}`} onClick={onClick} >
             {loading &&
@@ -21,4 +24,5 @@ const Button = ({ children, loading, className, type = "button", onClick = () =>
     )
 }
 
+// Exporta el componente para su uso en otros archivos
 export default Button

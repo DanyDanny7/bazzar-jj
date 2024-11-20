@@ -1,5 +1,5 @@
 import React from 'react'
-
+// Componente de lista que muestra un título, un icono y una lista de elementos
 const List = ({ tittle, icon, items }) => {
     return (
         <div>
@@ -10,5 +10,5 @@ const List = ({ tittle, icon, items }) => {
         </div >
     )
 }
-
+// Exporta el componente List para su uso en otros componentes
 export default List

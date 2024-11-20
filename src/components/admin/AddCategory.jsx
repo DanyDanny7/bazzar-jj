@@ -3,6 +3,7 @@ import isEmpty from "lodash/isEmpty";
 import toString from "lodash/toString";
 import Button from "@/components/util/Button";
 
+// Valores por defecto para un nuevo elemento de categoría
 const defaultValues = {
     _id: null,
     slug: "",
@@ -12,29 +13,35 @@ const defaultValues = {
     active: false
 }
 
+// Componente para agregar o editar una categoría
 const AddCategory = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading }) => {
+    // Estado para almacenar los valores del formulario
     const [values, setValues] = useState(defaultValues);
-
+// Determina si se está editando una categoría (verifica si `toEdit` tiene valores)
     const isEdit = !isEmpty(toEdit)
-
+// Efecto secundario para cargar los datos de la categoría a editar en el formulario
     useEffect(() => {
         if (!isEmpty(toEdit)) {
             setValues(toEdit)
         }
-    }, [JSON.stringify(toEdit)])
+    }, [JSON.stringify(toEdit)])// Dependencia basada en la serialización del objeto `toEdit` para una actualización eficiente
+
+    // Función para manejar el cambio en los campos del formulario
 
     const onChange = (e) => {
         setValues(state => ({
+            // Actualiza el estado con el valor del campo modificado
             ...state,
             [e.target.name]: e.target.name === "active" ? toString(e.target.checked) : e.target.value
         }))
     }
+    // Función para cancelar la operación de agregar/editar categoría
     const onCancel = () => {
-        setOpen(false);
-        setValues(defaultValues);
-        setToEdit({})
+        setOpen(false);// Cierra el modal del formulario
+        setValues(defaultValues);// Reinicia los valores del formulario
+        setToEdit({})// Limpia el objeto `toEdit`
     }
-
+ // Renderizado del componente
     return (
         <div className={className} >
             <form onSubmit={onSubmit(values)} >
