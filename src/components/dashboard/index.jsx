@@ -34,9 +34,9 @@ const Dashboard = ({ data }) => (
 
             {map(data, (category) => {
                 switch (toString(get(category, "type", 0))) {
-                    case "1": return <Type_1 category={category} />;
-                    case "2": return <Type_2 category={category} />;
-                    case "3": return <Type_3 category={category} />;
+                    case "Tarjeta": return <Type_1 category={category} />;
+                    case "Carrusel": return <Type_2 category={category} />;
+                    case "Banner": return <Type_3 category={category} />;
                     default: return <Type_1 category={category} />;
                 }
             })}
