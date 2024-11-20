@@ -6,7 +6,7 @@ export default function ShopByCategory({ categories }) {
     <div className="bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="sm:flex sm:items-baseline sm:justify-between">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Compra por Categorías</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Categorías</h2>
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
@@ -83,7 +83,7 @@ export default function ShopByCategory({ categories }) {
 
         <div className="mt-6 sm:hidden">
           <a href="#" className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
-            Browse all categories
+            Ver todas las categorias
             <span aria-hidden="true"> &rarr;</span>
           </a>
         </div>
