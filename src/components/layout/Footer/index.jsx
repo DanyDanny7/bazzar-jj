@@ -10,7 +10,7 @@ const navigation = {
     social: [
         {
             name: 'Facebook',
-            href: 'https://www.facebook.com/sabordelmundo',
+            href: 'https://www.facebook.com/bazar.fashion.jj?mibextid=ZbWKwL',
             icon: (props) => (
                 <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
                     <path
