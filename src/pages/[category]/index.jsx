@@ -4,6 +4,7 @@ import Category from "@/components/category";// Importa la biblioteca axios para
 import axios from "axios";// Importa la función isEmpty de lodash para verificar si un objeto está vacío
 import isEmpty from "lodash/isEmpty";// Importa el componente CEO desde la carpeta de utilidades
 import CEO from "@/components/util/CEO";// Importa la función get de lodash para acceder a propiedades de objetos
+import get from "lodash/get";
 
 // Define el componente Categoria que recibe `data` como prop
 const Categoria = ({ data }) => {
