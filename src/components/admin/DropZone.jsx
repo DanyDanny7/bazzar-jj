@@ -3,9 +3,10 @@ import { get, includes, map, split, trim, capitalize, lowerCase } from 'lodash';
 import { useDropzone } from 'react-dropzone'
 import * as XLSX from 'xlsx';
 
-
+// Componente DropZone que maneja la carga de archivos CSV
 const DropZone = ({ setProducts, textNoti, setTextNoti }) => {
 
+    // Efecto para limpiar la notificación después de 5 segundos
     useEffect(() => {
         if (!!textNoti) {
             setTimeout(() => {
@@ -14,23 +15,27 @@ const DropZone = ({ setProducts, textNoti, setTextNoti }) => {
         }
     }, [textNoti])
 
-
+        // Función que se ejecuta al soltar archivos
     const onDrop = useCallback((acceptedFiles, e) => {
         try {
-            const newFile = acceptedFiles[0];
+            const newFile = acceptedFiles[0];// Obtener el primer archivo aceptado
+
+            // Verificar si el archivo es un CSV
             if (includes(get(newFile, "name"), ".csv")) {
 
-                const fileReader = new FileReader();
-                fileReader.readAsArrayBuffer(newFile);
+                const fileReader = new FileReader();    // Crear un lector de archivos
+                fileReader.readAsArrayBuffer(newFile);  //Leer el archivo como un buffer
 
+                // Evento que se dispara cuando la lectura del archivo se completa
                 fileReader.onload = (e) => {
                     try {
-                        const bufferArray = e.target.result;
-                        const wb = XLSX.read(bufferArray, { type: 'buffer' });
-                        const wsname = wb.SheetNames[0];
-                        const ws = wb.Sheets[wsname];
-                        const toJson = XLSX.utils.sheet_to_json(ws);
+                        const bufferArray = e.target.result;                    // Obtener el resultado de la lectura
+                        const wb = XLSX.read(bufferArray, { type: 'buffer' });  // Leer el archivo como un libro de trabajo
+                        const wsname = wb.SheetNames[0];                        // Obtener el nombre de la primera hoja
+                        const ws = wb.Sheets[wsname];                           // Obtener la hoja
+                        const toJson = XLSX.utils.sheet_to_json(ws);            // Convertir la hoja a JSON
 
+                        // Mapear los datos del JSON a la estructura deseada
                         const list = map(toJson, (p) => {
                             return ({
                                 slug: p.slug,
@@ -42,14 +47,15 @@ const DropZone = ({ setProducts, textNoti, setTextNoti }) => {
                                     key: i + 1,
                                     imageSrc: trim(img),
                                     imageAlt: `${p.name} ${i + 1}`,
-                                    primary: i === 0
+                                    primary: i === 0             // Marcar la primera imagen como primaria
                                 })),
                                 colors: map(split(p.colors, ","), (color, i) => ({
                                     key: i + 1,
-                                    name: capitalize(trim(color)),
-                                    slug: lowerCase(trim(color)),
+                                    name: capitalize(trim(color)),// Capitalizar el nombre del color
+                                    slug: lowerCase(trim(color)), // Convertir el nombre del color a minúsculas
                                 })),
                                 sizes: [
+                                    // Definir las tallas y su disponibilidad en stock
                                     { name: "3", inStock: !!get(p, "3", false) },
                                     { name: "4", inStock: !!get(p, "4", false) },
                                     { name: "5", inStock: !!get(p, "5", false) },
@@ -79,29 +85,30 @@ const DropZone = ({ setProducts, textNoti, setTextNoti }) => {
                             })
                         })
 
-                        setProducts(list)
+                        setProducts(list)// Actualizar el estado de productos con la lista generada
 
                     } catch (error) {
                         fileReader.onerror = (error) => {
-                            console.log(error)
+                            console.log(error)// Manejar errores de lectura de archivo
                         };
                     }
                 };
 
             } else {
-                setTextNoti("Solo se admite formato CSV")
+                setTextNoti("Solo se admite formato CSV")// Notificar si el archivo no es CSV
             }
         } catch (error) {
-            console.log(error)
-            setTextNoti("Surgió un error al procesas el archivo, por favor reviselo")
+            console.log(error)// Manejar errores generales
+            setTextNoti("Surgió un error al procesas el archivo, por favor reviselo") // Notificar error en el procesamiento del archivo
         }
     }, [])
+    // Configuración del componente Dropzone
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return (
         <div className='flex flex-col justify-between gap-4'>
             <div className='flex-1'>
-                <input {...getInputProps()} />
+                <input {...getInputProps()} />{/* Input oculto para archivos */}
                 <div {...getRootProps()} >
                     <div className='h-[250px] w-full border rounded-sm p-2 cursor-pointer flex justify-center flex-col items-center'>
                         <svg className="w-[112px] h-[112px] mb-4" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg" >
@@ -119,7 +126,7 @@ const DropZone = ({ setProducts, textNoti, setTextNoti }) => {
                         <div className='min-h-[100px]'>
                             {isDragActive
                                 ? <>
-                                    Suelta tu CSV asquí.
+                                    Suelta tu CSV aquí.{/* Mensaje cuando el archivo está siendo arrastrado */}
                                     <br />
                                 </>
                                 : <div>
@@ -134,4 +141,5 @@ const DropZone = ({ setProducts, textNoti, setTextNoti }) => {
     )
 }
 
+// Exportar el componente DropZone
 export default DropZone
