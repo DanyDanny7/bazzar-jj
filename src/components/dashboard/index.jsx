@@ -37,11 +37,11 @@ const Dashboard = ({ data }) => (
 
             {/* Itera sobre las categorías y renderiza el componente correspondiente según su tipo */}
             {map(data, (category) => {
-                switch (toString(get(category, "type", 0))) {// Obtiene el tipo de categoría y lo convierte a cadena
-                    case "1": return <Type_1 category={category} />;// Renderiza Type_1 si el tipo es 1
-                    case "2": return <Type_2 category={category} />;// Renderiza Type_2 si el tipo es 2
-                    case "3": return <Type_3 category={category} />;// Renderiza Type_3 si el tipo es 3
-                    default: return <Type_1 category={category} />;// Renderiza Type_1 por defecto
+                switch (toString(get(category, "type", 0))) {
+                    case "Tarjeta": return <Type_1 category={category} />;
+                    case "Carrusel": return <Type_2 category={category} />;
+                    case "Banner": return <Type_3 category={category} />;
+                    default: return <Type_1 category={category} />;
                 }
             })}
         </div>

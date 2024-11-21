@@ -86,7 +86,7 @@ const AddCategory = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading 
 
                             <div className="sm:col-span-2">
                                 <label htmlFor="type" className="block text-left text-md font-medium text-gray-900">
-                                    Tipo:
+                                    Diseño:
                                 </label>
                                 <div className="mt-2">
                                     <select
@@ -96,9 +96,9 @@ const AddCategory = ({ className, setOpen, onSubmit, toEdit, setToEdit, loading 
                                         onChange={onChange}
                                         value={values.type}
                                     >
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+                                        <option>Tarjeta</option>
+                                        <option>Carrusel</option>
+                                        <option>Banner</option>
                                     </select>
                                 </div>
                             </div>
