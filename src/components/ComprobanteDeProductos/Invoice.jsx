@@ -5,14 +5,14 @@ import map from "lodash/map";
 
 const Invoice = ({ products, url }) => {
     return (
-        <div className="px-6 sm:px-10 lg:px-12 pb-4 pt-10 w-full">
-            <div className="sm:flex sm:items-center">
-                <div className="sm:flex-auto">
-                    <h1 className="text-3xl font-semibold text-gray-900">Comprobante de productos</h1>
-                    <p className="mt-2 text-lg text-gray-700">
+        <div className="px-6 sm:px-10 lg:px-12 pb-4 pt-14 w-full">
+            <div className="">
+                <div className="">
+                    <h1 className="text-xl md:text-3xl font-semibold text-gray-900 whitespace-nowrap">Comprobante de productos</h1>
+                    <p className="mt-4 text-md text-gray-700">
                         Contáctanos por Whatsapp al
                         <a className='px-2 inline-block text-whatsapp_dark' target='_blank' href={`http://wa.me/${process.env.NEXT_PUBLIC_WA_NUMBER}?text=${url}`}>
-                            <span className="text-base tracking-wide">{process.env.NEXT_PUBLIC_WA_NUMBER}</span>
+                            <span className="tracking-wide">{process.env.NEXT_PUBLIC_WA_NUMBER}</span>
                         </a>
                         para coordinar entrega o visítanos en nuestro local estamos ubicados en el Edificio Santa Teresa, en la 2a Calle Oriente &, 4a Avenida Sur, San Salvador.
                     </p>
