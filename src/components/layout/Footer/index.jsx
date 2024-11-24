@@ -47,7 +47,7 @@ const navigation = {
 
         {
             name: 'WhatsApp',
-            href: `https://wa.me/?text=${encodeURIComponent("https://bazzar-jj.vercel.app/")}`,
+            href: `https://wa.me/?text=${encodeURIComponent(`${process.env.NEXT_PUBLIC_API_URL}`)}`,
             action: "share/whatsapp/share",
             icon: (props) => (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" {...props}>

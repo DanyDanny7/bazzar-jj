@@ -1,7 +1,7 @@
 'use client'
 
 import { Transition } from '@headlessui/react'
-import { BuildingStorefrontIcon } from '@heroicons/react/24/outline'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 
 const Notification = ({ text, type, open, setClose }) => (
@@ -16,7 +16,7 @@ const Notification = ({ text, type, open, setClose }) => (
                         <div className="p-4">
                             <div className="flex items-start">
                                 <div className="shrink-0 pt-1">
-                                    <BuildingStorefrontIcon aria-hidden="true" className={`size-6 ${type === "success" ? "text-green-400" : "text-blue-400"}`} />
+                                    <ExclamationTriangleIcon aria-hidden="true" className={`size-6 ${type === "success" ? "text-green-400" : "text-red-400"}`} />
                                 </div>
                                 <div className="ml-3 w-0 flex-1">
                                     <p className="mt-1 text-sm text-gray-500">{text}</p>
