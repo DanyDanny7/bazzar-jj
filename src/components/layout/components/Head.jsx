@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Componente de encabezado que muestra un título y una descripción
 const Head = ({description, tittle}) => {
     return (
         <div className="mx-auto max-w-4xl lg:mx-0">
@@ -10,5 +11,5 @@ const Head = ({description, tittle}) => {
         </div>
     )
 }
-
+// Exporta el componente Head para su uso en otros componentes
 export default Head

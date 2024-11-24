@@ -14,7 +14,7 @@ export default function PoliticasGenerales() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <Head
                     tittle={"Políticas Generales"}
-                    description={"En Bazzar JJ, valoramos tu confianza. Por eso, te invitamos a leer detenidamente nuestras políticas generales. No dudes en consultarnos, nuestro equipo está a tu disposición para ayudarte. Encontrarás información sobre:"}
+                    description={"En Bazar Fashion JJ, valoramos tu confianza. Por eso, te invitamos a leer detenidamente nuestras políticas generales. No dudes en consultarnos, nuestro equipo está a tu disposición para ayudarte. Encontrarás información sobre:"}
                 />
 
                 <div className="grid grid-cols-1 gap-8 mt-10">
