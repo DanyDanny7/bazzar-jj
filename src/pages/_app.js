@@ -1,4 +1,7 @@
 import "@/styles/globals.css";
-import Session from "@/lib/Session";
+import Providers from "@/lib/Providers";
 
-export default ({ Component, pageProps }) => <Session><Component {...pageProps} /></Session>
+export default ({ Component, pageProps }) =>
+    <Providers>
+        <Component {...pageProps} />
+    </Providers>
