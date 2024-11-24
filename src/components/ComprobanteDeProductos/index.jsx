@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { usePDF } from 'react-to-pdf';
 import Button from "@/components/util/Button";
-import { useSearchParams } from 'next/navigation';
 import Notification from "@/components/ComprobanteDeProductos/Notification";
 import { useRouter } from "next/router";
 import dynamic from 'next/dynamic';
@@ -9,32 +8,22 @@ import Remember from "./Remember"
 
 const Invoice = dynamic(() => import('@/components/ComprobanteDeProductos/Invoice'), { ssr: false });
 
-const ComprobanteDeProductos = () => {
-    const searchParams = useSearchParams();
+const ComprobanteDeProductos = ({ products, error }) => {
     const router = useRouter();
-    const products = searchParams.get('p');
 
-    const [listProducts, setListProducts] = useState([]);
     const [text, setText] = useState({ text: "", type: "" });
     const [open, setOpen] = useState(false);
 
-
     const url = `${process.env.NEXT_PUBLIC_API_URL}${router.asPath}`;
 
-    const decodeData = async () => {
-        try {
-            await setListProducts(JSON.parse(decodeURIComponent(products)))
-            setOpen(true)
-        } catch (error) {
-            setText({ text: "No se pudo obtener el detalle del comprobante", type: "error" })
-        }
-    }
+    const { toPDF, targetRef } = usePDF({ filename: 'Comprobante.pdf' });
 
     useEffect(() => {
-        decodeData()
-    }, [products])
+        if (error) {
+            setText({ text: "No se pudo obtener el detalle del comprobante", type: "error" })
+        }
+    }, [error])
 
-    const { toPDF, targetRef } = usePDF({ filename: 'Comprobante.pdf' });
 
     return (
         <div>
@@ -56,7 +45,7 @@ const ComprobanteDeProductos = () => {
                 </Button>
             </div>
             <div ref={targetRef}>
-                <Invoice hiddenBtn listProducts={listProducts} url={url} />
+                <Invoice hiddenBtn products={products} url={url} />
             </div>
             <Notification text={text.text} type={text.type} open={!!text.text} setClose={() => setText({ text: "", type: "" })} />
             <Remember open={open} setOpen={setOpen} url={url} />

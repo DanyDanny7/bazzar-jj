@@ -3,7 +3,7 @@
 import sumBy from "lodash/sumBy";
 import map from "lodash/map";
 
-const Invoice = ({ listProducts, url }) => {
+const Invoice = ({ products, url }) => {
     return (
         <div className="px-6 sm:px-10 lg:px-12 pb-4 pt-10 w-full">
             <div className="sm:flex sm:items-center">
@@ -49,7 +49,7 @@ const Invoice = ({ listProducts, url }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {map(listProducts, (product, i) => (
+                        {map(products, (product, i) => (
                             <tr key={i} className="border-b border-gray-200">
                                 <td className="max-w-0 py-1 my-1 pl-4 pr-3 text-base sm:pl-0">
                                     <div className="pt-1 font-medium text-gray-900">{product.name}</div>
@@ -73,7 +73,7 @@ const Invoice = ({ listProducts, url }) => {
                             <th scope="row" className="pl-4 pr-3 pt-4 text-left text-base font-semibold text-gray-900 sm:hidden">
                                 Total
                             </th>
-                            <td className="pl-3 pr-4 pt-4 text-right text-base font-semibold text-gray-900 sm:pr-0 whitespace-nowrap">{`$ ${Number((sumBy(listProducts, "total")).toFixed(2)).toLocaleString()}`}</td>
+                            <td className="pl-3 pr-4 pt-4 text-right text-base font-semibold text-gray-900 sm:pr-0 whitespace-nowrap">{`$ ${Number((sumBy(products, "total")).toFixed(2)).toLocaleString()}`}</td>
                         </tr>
                     </tfoot>
                 </table>
