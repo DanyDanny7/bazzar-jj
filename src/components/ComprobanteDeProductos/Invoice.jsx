@@ -72,9 +72,6 @@ const Invoice = ({ products, url }) => {
                             >
                                 Total
                             </th>
-                            {/* <th scope="row" className="pl-4 pt-4 text-left text-base font-semibold text-gray-900 sm:hidden">
-                                Total
-                            </th> */}
                             <td className="pl-3 pt-4 text-right text-base font-semibold text-gray-900 whitespace-nowrap">{`$ ${Number((sumBy(products, "total")).toFixed(2)).toLocaleString()}`}</td>
                         </tr>
                     </tfoot>
