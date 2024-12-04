@@ -16,7 +16,7 @@ const AtencionAlCliente = () => {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <Head
               tittle={"Contáctenos"}
-              description={"¡Nos encantaría saber de ti! Si tienes preguntas, comentarios o necesitas más información sobre nuestros productos, no dudes en ponerte en contacto con nosotros a través de cualquiera de los siguientes métodos:"}
+              description={"¿Tienes preguntas sobre nuestros productos o servicios? Nuestro equipo de atención al cliente está listo para ayudarte. Ya sea que necesites asesoramiento personalizado, información técnica o desees realizar una consulta, no dudes en contactarnos. Te brindaremos una respuesta rápida a través de nuestras redes sociales."}
             />
 
             <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base/7 sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4">
