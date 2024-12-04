@@ -17,7 +17,7 @@ const EnvioDevolucion = () => {
 
           <Head
             tittle={"Políticas de Envío y Devolución"}
-            description={"Nuestra prioridad es tu satisfacción. Por eso, hemos creado estas políticas claras y transparentes para que tu experiencia de compra sea lo más sencilla posible. ¡Estamos aquí para ayudarte en todo momento!"}
+            description={"Queremos que te sientas seguro al comprar en bazar fashion jj. Por eso, te ofrecemos políticas de envío y devolución flexibles que garantizan tu satisfacción. ¡Estamos aquí para ayudarte en todo momento!"}
           />
           <div className="mx-auto max-w-4xl lg:mx-0 mt-10">
             <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-2xl">Políticas de Envío</h2>
